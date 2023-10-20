@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: farfanoide (https://github.com/farfanoide)
+#= DESCRIPTION: Basic remote tmux session
+#= SERVER: oxygen
+#= SERVICE: mosh
+#= TMUX_CONFIG: yes
+#= NAME: Oxygen
+#= LOADER: remote
+
+export TERM=eterm-color
+
+new_session -n 'home'
+
+send_line 'home' 'ls'
+
+new_window -n 'gitlab'
+send_line 'gitlab' 'gitlab'
+send_line 'gitlab' 'cd ~/inthependiente'
+
+# new_window -n 'cloudatcost'
+# send_line 'cloudatcost' 'cd ~/storage/Repositories/cloudatcost'

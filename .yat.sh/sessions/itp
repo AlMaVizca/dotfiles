@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: krahser (https://github.com/krahser)
+#= DESCRIPTION: Basic tmux global session
+
+new_session -d -n 'ITP'
+send_line 'ITP' 'cd ${inthependiente}'
+
+new_window -n 'cac'
+send_line 'cac' 'cd ${cac_cloudflare}'
+
+new_window -n 'kubespray'
+send_line 'kubespray' 'cd ${kubespray}'
+
+new_window -n 'lb'
+send_line 'lb' 'cd ${inthependiente}/lb'
+
+new_window -n 'gitlab'
+send_line 'gitlab' 'cd ${inthependiente}/gitlab-runner'
+
+new_window -n 'monitoring'
+send_line 'monitoring' 'cd ${inthependiente}/monitoring'

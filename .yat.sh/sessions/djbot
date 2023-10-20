@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: farfanoide (https://github.com/farfanoide)
+#= DESCRIPTION: Basic tmux global session
+
+# Create a new session and name the first window 'General'
+# This is required as it actually creates the new session
+new_session -n 'Emacs'
+send_line 'Emacs' 'emacsclient -s /tmp/emacs1000/main -t'
+
+new_window -n 'Djbot'
+send_line 'Djbot' "cd ~/Repositories/DJBot/DJBot"
+vsplit 'Djbot'
+paneindex=$(get_pane_base_index)
+send_line "Djbot.$(($paneindex + 1))" "cd ~/Repositories/DJBot/DJBot;docker logs -f DJBot"
+
+new_window -n 'Bitcoin'
+send_line 'Bitcoin' "cd ~/Documents/bitcoin/"
+
+# Let's create yet another window
+new_window -n 'Tmp'
+send_line 'Tmp' 'cd /tmp'

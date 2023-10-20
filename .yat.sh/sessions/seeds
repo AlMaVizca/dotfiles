@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: farfanoide (https://github.com/farfanoide)
+#= DESCRIPTION: Basic tmux global session
+#= SERVER: neon
+#= SERVICE: mosh
+#= TMUX_CONFIG: yes
+#= NAME: seeds
+#= LOADER: remote
+
+# Create a new session and name the first window 'General'
+# This is required as it actually creates the new session
+new_session -n 'Seeds'
+send_line 'Seeds' "cd ~/Repositories/seeds/"
+
+hsplit 'Seeds'
+paneindex=$(get_pane_base_index)
+send_line "Seeds.$(($paneindex + 1))" "cd ~/Repositories/seeds;dcup"
+
+# Let's create yet another window
+new_window -n 'Tmp'
+send_line 'Tmp' 'cd /tmp'

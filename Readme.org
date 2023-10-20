@@ -1,0 +1,24 @@
+* Dotfiles
+
+This are my personal configurations, feel free to use them and suggest changes.
+
+[[https://systemcrafters.net/managing-your-dotfiles/using-gnu-stow/][Here]] is a quick overview of how this works.
+** Installation
+
+1. Clone the repository, or download the package in `~/.dotfiles`
+2. Install all the configurations using /stow/
+   #+begin_src sh
+     stow .
+   #+end_src
+   This will replicate the paths with symlinks.
+
+
+** What configurations does it have?
+- git - you will have to setup your user
+- Ansible for socket reuse with assh
+- Emacs - many things 😆
+- Npm
+- Python
+- Zsh + powerline
+  with extra functions
+- Tmux + yat.sh

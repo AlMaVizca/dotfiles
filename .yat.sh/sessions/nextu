@@ -1,0 +1,42 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: farfanoide (https://github.com/farfanoide)
+#= DESCRIPTION: Basic remote tmux session
+
+new_session -d -n 'NU'
+send_line 'NU' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/'
+
+
+new_window -n 'c'
+send_line 'c' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/cafe-service/src'
+
+new_window -n 'd'
+send_line 'd' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/dashboard-service/src'
+
+new_window -n 'g'
+send_line 'g' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/grade-service/src'
+
+new_window -n 'j'
+send_line 'j' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/jobs-service/src'
+
+new_window -n 'p'
+send_line 'p' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/profile-service/src'
+
+new_window -n 'm'
+send_line 'm' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/moodle/var/www/html/'
+
+new_window -n 'n'
+send_line 'n' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/notification-service/src/'
+
+# new_window -n 'admin-tool'
+# send_line 'admin-tool' 'cd ${nextu_admintool_server}'
+
+# new_window -n 'ws-stats'
+# send_line 'ws-stats' 'cd ${nextu_ws1_stats}'
+
+# new_window -n 'nextu-ws1'
+# send_line 'nextu-ws1' 'cd ${nextu_ws1}'
+
+# new_window -n 'noti'
+# send_line 'noti' 'cd ${nextu_notifications}'

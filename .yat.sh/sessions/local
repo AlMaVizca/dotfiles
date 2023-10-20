@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: krahser (https://github.com/krahser)
+#= DESCRIPTION: Basic tmux global session
+
+new_session -d -n 'Home'
+send_line 'Home' 'ls'
+
+new_window -n 'Repositories'
+send_line 'Repositories' 'cd ~/Repositories'
+
+new_window -n 'farmOS'
+send_line 'farmOS' 'cd ${Agriculture}/farmOS/docker'
+
+new_window -n 'odoo'
+send_line 'odoo' 'cd ~/Repositories/AlMaVizca/odoo/'
+
+# new_window -n 'ITP'
+# send_line 'ITP' 'cd ${inthependiente}'
+
+# new_window -n 'Tmp'
+# send_line 'Tmp' 'cd /tmp'

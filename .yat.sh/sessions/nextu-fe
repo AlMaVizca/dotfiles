@@ -1,0 +1,22 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: farfanoide (https://github.com/farfanoide)
+#= DESCRIPTION: Basic remote tmux session
+
+new_session -d -n 'NU'
+send_line 'NU' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/'
+
+new_window -n 'a'
+send_line 'a' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/admin/'
+new_window -n 'd'
+send_line 'd' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/dashboard/src'
+
+new_window -n 'j'
+send_line 'j' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/jobs/src'
+
+new_window -n 'p'
+send_line 'p' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/profile/src'
+
+new_window -n 'cc'
+send_line 'cc' 'cd /home/krahser/Work/NextU/repositories/nextu-docker-stack/nu-client-common/'

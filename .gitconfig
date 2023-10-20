@@ -1,0 +1,42 @@
+[user]
+	name = AlMaVizca
+	email = aldo.vizcaino87@gmail.com
+	signingkey = 95E7D44EAF29704D
+[push]
+	default = simple
+[alias]
+	unstage = reset HEAD --
+	s = status
+	lol = log --graph --decorate\n    --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate\n    --pretty=oneline --abbrev-commit --all --date=local
+# [core]
+# 	editor = emacsclient -s ${ESOCKET} -t
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+
+[credential]
+	helper = /usr/lib/git-core/git-credential-gnome-keyring
+[http "https://gopkg.in"]
+	followRedirects = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pull]
+	rebase = false
+
+[commit]
+	gpgsign = true
+
+[init]
+	defaultBranch = main
+
+[include]
+  path = ~/.gitconfigs/github
+
+# [includeIf "gitdir:~/Work/<company>/"]
+#   path = ~/.gitconfigs/company

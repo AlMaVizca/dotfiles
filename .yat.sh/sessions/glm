@@ -1,0 +1,17 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: krahser (https://github.com/krahser)
+#= DESCRIPTION: Basic tmux global session
+#= TMUX_CONFIG: yes
+#= NAME: glm
+
+
+new_session -d -n 'util'
+send_line 'util' 'cd ~/Work/Util'
+
+# new_window -n 'hcd'
+# send_line 'hcd' 'cd ~/Repositories/grallamadrid/hcd/'
+
+# new_window -n 'Tmp'
+# send_line 'Tmp' 'cd /tmp'

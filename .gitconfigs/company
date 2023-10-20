@@ -1,0 +1,7 @@
+[user]
+  name = Aldo Maria Vizcaino
+  email = aldo.vizcaino@company.com
+  signingKey = <key>
+
+[url "git@<ssh-config>"]
+  insteadOf = git@github.com

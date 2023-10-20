@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: farfanoide (https://github.com/farfanoide)
+#= DESCRIPTION: Basic remote tmux session
+#= SERVER: vlopez
+#= NAME: Remote Session
+#= LOAADER: remote
+
+new_session -n 'Vlopez'
