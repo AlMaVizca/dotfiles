@@ -1,0 +1,9 @@
+[Unit]
+Description=Gitlab-runner
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/gitlab-runner "run" "--working-directory" "/home/krahser/.gitlab-runner" "--config" "/home/krahser/.gitlab-runner/config.toml" "--service" "gitlab-runner"
+
+[Install]
+WantedBy=default.target

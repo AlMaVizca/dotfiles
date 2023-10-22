@@ -1,0 +1,14 @@
+[Unit]
+Description=Emacs: the extensible, self-documenting text editor
+After=ssh-agent.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs  --daemon=%i
+ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
+Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+TimeoutStartSec=2min
+Restart=always
+
+[Install]
+WantedBy=default.target
