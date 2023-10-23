@@ -1,10 +1,7 @@
 ;; my-bookmarks --- customizations with bookmarks
-;; (add-to-list 'load-path "~/Repositories/bookmark-plus/")
-;; (load "bookmark+")
-;; (setq bookmark-version-control t)
+;;; Commentary: make bookmarks accesible by the shell
 ;;; Code:
 (require 'bookmark)
-(setq bookmark-default-file "~/Repositories/dotfiles/emacs.d/bookmarks.el")
 (bookmark-load bookmark-default-file t)
 
 (defadvice bookmark-write-file

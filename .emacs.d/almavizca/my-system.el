@@ -4,6 +4,7 @@
 (require 'my-bookmarks)
 (require 'my-theme)
 (require 'my-daemon)
+(require 'my-secrets)
 (require 'my-docker)
 
 (require 'tramp)
@@ -52,7 +53,6 @@
 (require 'my-keys)
 
 
-(require 'my-secrets)
 (require 'my-shell)
 
 (use-package proc-net
@@ -62,6 +62,7 @@
 ;; (use-package pocket-reader
 ;;   :ensure t)
 
+(require 'my-ansible)
 (use-package lxc-tramp
   :ensure f)
 
