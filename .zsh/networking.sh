@@ -19,6 +19,6 @@ eth_forward(){
     iptables -t nat -A POSTROUTING -s 192.168.27.0/24 -o wlp0s20f0u1u3 -j MASQUERADE
 }
 
-network_status(){
-    systemctl status NetworkManager
+network(){
+    sudo systemctl $1 NetworkManager
 }

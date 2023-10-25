@@ -61,10 +61,12 @@
 
 (use-package magit-todos
   :ensure t
+  :straight t
   )
 
 (use-package magit
   :ensure t
+  :straight t
   :config
   (magit-todos-mode)
   )
@@ -76,8 +78,8 @@
 
 (use-package forge
   :ensure t
+  :straight t
   :after magit
-  :disabled t
   )
 ;; (require 'my-dashboard)
 
@@ -227,6 +229,7 @@
 (require 'my-makefile-runner)
 
 (require 'my-ai)
+(require 'my-ansible)
 
 (use-package impostman
   :ensure t)

@@ -4,7 +4,6 @@ export GITLAB_Nomanod=$(pass show Work/gitlab.com/group_nomanod)
 export GITLAB_Awrora=$(pass show Work/gitlab.com/group_awrora)
 export GITLAB_Grallamadrid=$(pass show Work/gitlab.com/group_grallamadrid)
 
-
 function gitlab-create(){
     gitlab project create --name $argv[1] --namespace ${GITLAB_GROUP}
     echo git@gitlab.com:${GITLAB_NAME}/$argv[1].git
@@ -14,3 +13,10 @@ function gitlab-create(){
        git clone git@gitlab.com:${GITLAB_NAME}/$argv[1].git ${GITLAB_PATH}/$argv[1]
     fi
 }
+
+
+
+# Flux autocompletion
+if [[ -x /usr/bin/flux ]]; then
+    . <(flux completion bash)
+fi

@@ -23,6 +23,5 @@
  bitly-access-token (password-store-get "Work/bitly.com/token")
  )
 
-
-
 (provide 'my-secrets)
+;;; my-secrets ends here.

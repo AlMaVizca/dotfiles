@@ -20,6 +20,8 @@
 (use-package codeium
   ;; if you use straight
   :straight '(:type git :host github :repo "Exafunction/codeium.el")
+  :custom
+  (codeium/metadata/api_key (password-store-get "Work/codeium.com/token"))
   :init
   ;; use globally
   (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)

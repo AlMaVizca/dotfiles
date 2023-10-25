@@ -49,11 +49,6 @@
   ;;   (tablist-minor-mode))
   )
 
-;;; TODO: deprecated, please use integrated package tramp-container
-(use-package docker-tramp
-  :ensure t
-  )
-
 (use-package docker-cli
   :ensure t)
 

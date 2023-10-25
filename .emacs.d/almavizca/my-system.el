@@ -1,10 +1,12 @@
 ;;; my-system --- System management
 ;;; Commentary: system settings
+
 (require 'my-packages)
+(require 'my-secrets)
 (require 'my-bookmarks)
 (require 'my-theme)
 (require 'my-daemon)
-(require 'my-secrets)
+
 (require 'my-docker)
 
 (require 'tramp)
@@ -61,10 +63,6 @@
 ;; TODO
 ;; (use-package pocket-reader
 ;;   :ensure t)
-
-(require 'my-ansible)
-(use-package lxc-tramp
-  :ensure f)
 
 
 (provide 'my-system)
