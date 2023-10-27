@@ -18,5 +18,5 @@ function gitlab-create(){
 
 # Flux autocompletion
 if [[ -x /usr/bin/flux ]]; then
-    . <(flux completion bash)
+    . <(flux completion zsh)
 fi
