@@ -1,8 +1,23 @@
 alias sshell="manage shell_plus"
 
-workon(){
-    source ${VENVS}/$1/bin/activate
+# pip zsh completion start
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null ))
 }
+compctl -K _pip_completion pip
+
+
+# pip zsh completion end
+
+create_env(){
+    python -v venv ${VENVS}/$1
+ }
+
 
 envs(){
     ls ${VENVS}
@@ -15,23 +30,19 @@ venv(){
     # find a parent git directory
     # if that directory contains a virtualenv in a ".venv" directory, activate it
 
-
-
     if [[ (-f "${GIT_LOCAL_DIR}/requirements.txt") ]]; then
-
         if [[ (-f "${GIT_LOCAL_DIR}/${VNAME}") &&
                   (! -f "${GIT_LOCAL_DIR}/${VPATH}")]]; then
             source ${GIT_LOCAL_DIR}/${VNAME}
             rm -rf ${GIT_LOCAL_DIR}/${VPATH}
+
             if [[ ! -d ${VENVS}/${VNAME} ]]; then
-                echo "Creating venv"
-                python3 -m venv ${VENVS}/${VNAME}
+                create_env ${VNAME}
             fi
             ln -sf ${VENVS}/${VNAME} ${GIT_LOCAL_DIR}/${VPATH}
-    elif [[ ( ! -d "${GIT_LOCAL_DIR}/${VPATH}" ) && ( ! -f "${GIT_LOCAL_DIR}/${VPATH}" )  ]]; then
-            python3 -m venv ${VENVS}/${VPROJECT}
+        elif [[ ( ! -d "${GIT_LOCAL_DIR}/${VPATH}" ) && ( ! -f "${GIT_LOCAL_DIR}/${VPATH}" )  ]]; then
+            create_env ${VENVS}/${VPROJECT}
             ln -sf ${VENVS}/${VPROJECT} ${GIT_LOCAL_DIR}/.venv
-            echo Symlink ${GIT_LOCAL_DIR} ${VENVS}/${VPROJECT} created
             source ${GIT_LOCAL_DIR}/${VPATH}/bin/activate
             pip install -r ~/.pip/requirements.txt >> /dev/null
             pip install -r ${GIT_LOCAL_DIR}/requirements.txt >> /dev/null
@@ -55,7 +66,6 @@ venv(){
     if [[ (-n "$VIRTUAL_ENV" &&
                ("$VIRTUAL_ENV" != "$GIT_LOCAL_DIR}/${VPATH}")) ]]; then
         if [[ ! -f "${GIT_LOCAL_DIR}/${VPATH}/bin/activate" ]] ; then
-            echo deactivate
             deactivate
         fi
     fi
