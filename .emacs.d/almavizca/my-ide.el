@@ -59,17 +59,17 @@
 (require 'my-lsp)
 ;; (require 'my-eglot)
 
-(use-package magit-todos
-  :ensure t
-  :straight t
-  )
-
 (use-package magit
   :ensure t
-  :straight t
+  )
+
+(use-package magit-todos
+  :ensure t
+  :after magit
   :config
   (magit-todos-mode)
   )
+
 
 ;; (use-package magithub
 ;;   :after magit
@@ -78,21 +78,9 @@
 
 (use-package forge
   :ensure t
-  :straight t
   :after magit
   )
 ;; (require 'my-dashboard)
-
-;; (require 'my-grammarly)
-
-;;; TODO
-(use-package company-tabnine
-  :ensure t
-  :disabled t
-  )
-
-;; (add-to-list 'company-backends #'company-tabnine)
-
 
 (use-package company
   :straight  t
