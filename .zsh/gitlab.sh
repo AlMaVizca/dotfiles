@@ -3,6 +3,7 @@
 export GITLAB_Nomanod=$(pass show Work/gitlab.com/group_nomanod)
 export GITLAB_Awrora=$(pass show Work/gitlab.com/group_awrora)
 export GITLAB_Grallamadrid=$(pass show Work/gitlab.com/group_grallamadrid)
+export GITLAB_ingeniero=$(pass show Work/gitlab.com/group_ingeniero)
 
 function gitlab-create(){
     gitlab project create --name $argv[1] --namespace ${GITLAB_GROUP}

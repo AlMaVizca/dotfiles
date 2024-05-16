@@ -23,7 +23,7 @@ alias passwords_change="sudo chattr -i ~/.local/share/keyrings/login.keyring"
 #Makefiles
 alias blog="make -C ~/Repositories/AlMaVizca/blog/"
 alias bot="make -C ~/Repositories/economics/binance-trading-bot"
-alias cache="make -C /home/krahser/Repositories/inthependiente/caches"
+alias cache="make -C /home/krahser/Repositories/AlMaVizca/caches/"
 alias cihelper="make -C /home/krahser/Repositories/inthependiente/helpers/"
 alias databases="make -C /home/krahser/Repositories/inthependiente/databases/"
 alias economia="make -C ~/Repositories/economics/econo_mia"
