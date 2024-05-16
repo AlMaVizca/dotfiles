@@ -1,4 +1,6 @@
-;;; keymaps
+;;; my-keybindings - Global shortcuts
+;;; Comentary: Shortcuts to avoid leaving the working buffer
+
 (defun bootrap ()
   "Lunch shell."
   (interactive)
@@ -20,11 +22,4 @@
 (global-set-key (kbd "C-º") (lambda () () (interactive) (neotree)))
 (global-set-key (kbd "M-s s") (lambda () () (interactive) (my-keys-ssh-flush)))
 
-
-
-
-
-
-
-
-(provide 'my-keys)
+(provide 'my-keybindings)
