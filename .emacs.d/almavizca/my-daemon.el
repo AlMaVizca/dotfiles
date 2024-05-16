@@ -1,19 +1,18 @@
-;;; my-daemon package
+;;; my-daemon --- Daemon customizations
+;;; Commentary: Setup daemon generic settings
 
 ;;; Code
 (require 'bookmark)
+
 (setq
  daemon-name (if (not (daemonp)) "no daemon" (daemonp))
  desktop-save nil
  initial-buffer-choice (bookmark-get-filename "ToDo")
- )
-(setq frame-title-format daemon-name)
-(add-to-list 'mode-line-misc-info daemon-name)
-
-(setq
- roam-directory (bookmark-get-filename "notes")
+ frame-title-format daemon-name
  repositories (bookmark-get-filename "repos")
  )
 
+(add-to-list 'mode-line-misc-info daemon-name)
+
 (provide 'my-daemon)
-;;; my-daemon ends here
+;;; my-daemon.el ends here

@@ -1,5 +1,6 @@
-;;; my-ai - AI usage
-;;; Commentary: AI configurations
+;;; my-ai --- AI  companion tools
+;;; Commentary:
+;;; Code:
 
 ;; (use-package openai
 ;;   :straight
@@ -11,7 +12,7 @@
 ;;   )
 
 (use-package gptel
-  :straight gptel
+  :straight t
   :custom
   (gptel-api-key (password-store-get "Work/openai.com/token"))
   ;; (gptel-model "gpt-4")
@@ -20,15 +21,16 @@
 (use-package codeium
   ;; if you use straight
   :straight '(:type git :host github :repo "Exafunction/codeium.el")
+  :disabled t
   :custom
   (codeium/metadata/api_key (password-store-get "Work/codeium.com/token"))
   :init
   ;; use globally
-  (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
+                                        ;(add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
   ;; or on a hook
-  ;; (add-hook 'python-mode-hook
-  ;;     (lambda ()
-  ;;         (setq-local completion-at-point-functions '(codeium-completion-at-point))))
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq-local completion-at-point-functions '(codeium-completion-at-point))))
 
   ;; if you want multiple completion backends, use cape (https://github.com/minad/cape):
   ;; (add-hook 'python-mode-hook
@@ -79,5 +81,5 @@
   (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset)
   )
 
-
 (provide 'my-ai)
+;;; my-ai.el ends here

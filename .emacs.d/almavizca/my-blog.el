@@ -1,9 +1,12 @@
-;;; my-blog
+;;; my-blog --- Personal blog settings
+;;; Commentary:
+;;; Code:
 
 (require 'bookmark)
 
 (use-package htmlize
-  :ensure t)
+  :ensure t
+  :commands (htmlize-buffer htmlize-file))
 
 (use-package esxml
   :ensure t)
@@ -12,14 +15,13 @@
 
 (defvar av/blog-name "AlMaVizca")
 
-(defvar av/site-url (if (string-equal (getenv "CI") "true")
-                        "https://almavizca.xyz"
-                      "http://almavizca.localdev")
-  "The URL for the site being generated.")
+;; (defvar av/site-url (if (string-equal (getenv "CI") "true")
+;;                         "https://almavizca.xyz"
+;;                       "http://almavizca.docker")
+;;   "The URL for the site being generated.")
 
 (defun av/build-path (path)
-  (concat (bookmark-get-filename "blog") path)
-  )
+  (concat (bookmark-get-filename "blog") path))
 
 (setq
  assets-path (av/build-path "assets")
@@ -43,11 +45,11 @@
                                :html-preamble av/website-html-preamble
                                :html-postamble av/website-html-postamble
                                )
-                              ("blog:cv"
-                               :base-directory ,cv-path
-                               :publishing-directory ,website-path
-                               :publishing-function org-latex-publish-to-pdf
-                               )
+                              ;; ("blog:cv"
+                              ;;  :base-directory ,cv-path
+                              ;;  :publishing-directory ,website-path
+                              ;;  :publishing-function org-latex-publish-to-pdf
+                              ;;  )
                               ("blog:assets"
                                :base-directory  ,assets-path
                                :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|woff2\\|ttf\\|asc"

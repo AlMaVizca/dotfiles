@@ -1,6 +1,7 @@
 ;;; my-packages --- custom package managers and sources
 ;;; Commentary: Personal choices to manage packages
 
+(setq straight-log t)
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -19,14 +20,20 @@
 
 
 (use-package helm
+  :ensure t
   :straight t
   )
 
 (straight-use-package 'org)
 
 (use-package mermaid-mode
-  :ensure t)
+  :ensure t
+  :commands mermaid-mode
+  )
 
+(use-package sudo-edit
+  :ensure f
+  :disabled t)
 
 (provide 'my-packages)
 ;;; my-packages ends here

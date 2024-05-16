@@ -2,6 +2,7 @@
 ;;; Commentary: Taken from system crafters
 
 (require 'bookmark)
+(setq  roam-directory (bookmark-get-filename "notes"))
 
 ;; Turn on indentation and auto-fill mode for Org files
 (defun dw/org-mode-setup ()
@@ -393,6 +394,11 @@
       :olp ("Log")
       ))
    )
+  )
+
+(use-package toc-org
+  :ensure t
+  :after org-mode
   )
 
 ;; (cl-defmethod org-roam-node-type ((node org-roam-node))

@@ -1,14 +1,13 @@
 ;;; package --- my-langtool
-;;; Commentary: My langtool setup
+;;; Commentary:
+;;; Code:
 
 (use-package langtool
   :ensure t
+  :commands langtool-check
   :config
-  (setq langtool-http-server-host "langtool.localdev"
-        langtool-http-server-port 8010)
-
-  )
-
+  (setq langtool-http-server-host "langtool.docker"
+        langtool-http-server-port 8010))
 
 (provide 'my-langtool)
-;;; my-langtool ends here
+;;; my-langtool.el ends here

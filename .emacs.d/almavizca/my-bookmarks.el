@@ -2,14 +2,12 @@
 ;;; Commentary: make bookmarks accesible by the shell
 ;;; Code:
 (require 'bookmark)
+(setq-default bookmark-default-file "~/.dotfiles-secrets/.local/emacs.d/bookmarks.el")
 (bookmark-load bookmark-default-file t)
 
 (defadvice bookmark-write-file
     (after local-directory-bookmarks-to-zsh-advice activate)
-  (local-directory-bookmarks-to-zsh)
-  (local-directory-bookmarks-to-fish)
-  )
-
+  (local-directory-bookmarks-to-zsh))
 
 (defun local-directory-bookmarks-to-zsh ()
   (interactive)
@@ -60,8 +58,6 @@
 ;;     (let* ((name (car bookmark))
 ;;            (file (bookmark-get-filename name)))
 ;;       (define-abbrev global-abbrev-table name file))))
-
-
 
 (provide 'my-bookmarks)
 ;;; my-bookmarks ends here
