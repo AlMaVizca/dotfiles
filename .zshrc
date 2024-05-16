@@ -23,6 +23,9 @@ source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 setopt cd_able_vars
 [[ -r ~/.zsh.bmk ]] && source ~/.zsh.bmk
 
+if [[ -f ${ZSH_AUTO} ]]; then
+    source ${ZSH_AUTO}
+fi
 
 if [[ -d ${dotfiles_zsh} ]]; then
     for each in $(ls ${dotfiles_zsh}); do
