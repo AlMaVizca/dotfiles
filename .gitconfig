@@ -1,9 +1,10 @@
 [user]
-	name = AlMaVizca
+	name = Aldo Maria Vizcaino
 	email = aldo.vizcaino87@gmail.com
 	signingkey = 95E7D44EAF29704D
 [push]
 	default = simple
+	autoSetupRemote = true
 [alias]
 	unstage = reset HEAD --
 	s = status
