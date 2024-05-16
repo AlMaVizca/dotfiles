@@ -1,0 +1,15 @@
+[Unit]
+Description=Traefik service on podman
+Requires=traefik.socket
+After=traefik.socket
+
+[Container]
+Image=docker.io/traefik:latest
+Network=lb
+Pull=never
+Environment=ARGS="--accesslog=true --log=true --log.level=DEBUG --api=true --api.insecure=true --api.debug=true --api.dashboard=true --providers.docker=true --providers.docker.exposedbydefault=true --entrypoints.web.address=:80 --entrypoints.ws"
+Exec="/entrypoint.sh" ; ${ARGS}
+PublishPort=192.168.3.1:80:8080
+
+# [Install]
+# WantedBy=default.target
