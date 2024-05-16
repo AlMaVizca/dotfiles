@@ -1,8 +1,9 @@
-;;; my-theme - theme preferences
-;;; Commentary: theme settings
+;;; my-theme --- theme preferences
+;;; Commentary:
 ;;; Code:
 
 (use-package doom-modeline
+  ;; Run nerd-icons-install-fonts
   :ensure  t
   :init
   (doom-modeline-mode 1)
@@ -47,6 +48,9 @@
 (use-package all-the-icons-ivy-rich
   :ensure t)
 
+(use-package all-the-icons-nerd-fonts
+  :ensure t)
+
 (use-package counsel
   :ensure t)
 
@@ -58,3 +62,4 @@
 ;; (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 (provide 'my-theme)
+;;; my-theme.el ends here
