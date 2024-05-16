@@ -6,69 +6,36 @@
   :config
   (ivy-mode)
   )
+(use-package ivy-rich
+  :ensure t)
+
 
 (use-package fill-column-indicator
+  ;; Display a line at 80 characters width
   :ensure  t
   :custom
-  (fill-column 80)
-  )
-
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; fix acute
-(require 'iso-transl)
-
-(setq-default history-length 500)
-(setq
- enable-remote-dir-locals t
- ;; Follow symlinks without ask
- vc-follow-symlinks t
- ;; debug errors
- debug-on-error t
- )
-
-;; TODO: Review
-;; Open file under cursor
-(defun jump-local-file ()
-  (interactive)
-  (find-file
-   ( thing-at-point 'filename)
-   )
-  )
-;; (global-set-key (kbd "M-.") 'jump-local-file)
-
-
-(add-hook 'text-mode-hook 'auto-fill-mode)
-(add-hook 'markdown-mode-hook 'auto-fill-mode)
-
-
-;; (require 'bash-completion)
-;; (bash-completion-setup)
-
+  (fill-column 80))
 
 ;; (require 'my-python)
-(require 'my-html)
-;;(require 'my-treemacs)
-
-;; TODO
-;; (use-package npm
-;;   :ensure t)
+(require 'my-ide-html)
 
 ;; Custom LSP Environments
-(require 'my-typescript)
-(require 'my-lsp)
+(require 'my-ide-typescript)
+;; (require 'my-lsp)
 ;; (require 'my-eglot)
+
 
 (use-package magit
   :ensure t
+  :straight t
   )
 
-(use-package magit-todos
-  :ensure t
-  :after magit
-  :config
-  (magit-todos-mode)
-  )
+;; (use-package magit-todos
+;;   :ensure t
+;;   :after magit
+;;   :config
+;;   (magit-todos-mode)
+;;   )
 
 
 ;; (use-package magithub
@@ -76,14 +43,15 @@
 ;;   :ensure t
 ;;   :config (magithub-feature-autoinject t))
 
-(use-package forge
-  :ensure t
-  :after magit
-  )
+;; (use-package forge
+;;   :ensure t
+;;   :after magit
+;;   )
 ;; (require 'my-dashboard)
 
 (use-package company
-  :straight  t
+  :ensure t
+  :straight  nil
   :hook
   (
    (typescript-mode . company-mode)
@@ -103,7 +71,8 @@
   )
 
 (use-package company-box
-  :straight  t
+  :ensure t
+  :straight  nil
   :hook (company-mode . company-box-mode)
   )
 
@@ -131,68 +100,32 @@
   )
 
 
-(use-package prettier-js
-  :ensure  t
-  :custom
-  (prettier-js-args '(
-                      "--trailing-comma" "all"
-                      "--bracket-spacing" "true"
-                      "--single-quote" "true"
-                      )
-                    )
-  (prettier-js-mode nil)
-  :hook
-  (
-   (javascript-mode . prettier-js-mode)
-   (typescript-mode . prettier-js-mode)
-   )
-  )
-
-(use-package focus
-  :ensure t
-  :hook
-  (
-   (javascript-mode . focus-mode)
-   (typescript-mode . focus-mode)
-   )
-  )
+;; TODO: review focus mode
+;; (use-package focus
+;;   :ensure t
+;;   :hook
+;;   (
+;;    (javascript-mode . focus-mode)
+;;    (typescript-mode . focus-mode)
+;;    )
+;;   )
 
 (use-package flycheck
   :ensure t
   :hook
-  (
-   (typescript-mode . flycheck-mode)
-   )
+  ((typescript-mode . flycheck-mode)))
 
-  )
+(require 'my-ide-projects)
 
-(require 'my-projectile)
-
-(use-package perspective
-  :straight t
-  :bind
-  ("C-x C-b" . persp-list-buffers) ; or use a nicer switcher, see below
-  :custom
-  (persp-mode-prefix-key (kbd "C-z"))  ; pick your own prefix key here
-  :init
-  (persp-mode)
-  :hook
-  (kill-emacs . persp-state-save)
-  )
-
-(use-package js2-mode
-  :straight t)
-
-(use-package js2-refactor
-  :straight t)
+;; TODO: perspective
 
 (use-package web-mode
-  :straight  t
+  :ensure t
+  :straight  nil
   :mode
   (
    ("\\.html?\\'" . web-mode)
    ("\\.tsx\\'" . web-mode)
-   ("\\.jsx\\'" . web-mode)
    )
   :config
   (setq web-mode-markup-indent-offset 2
@@ -209,23 +142,33 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                )))
-  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
-  )
-
-
-(require 'my-makefile-runner)
-
-(require 'my-ai)
-(require 'my-ansible)
+                ))))
 
 (use-package impostman
-  :ensure t)
+  :ensure t
+  :commands impostman-import-file)
 
 (use-package alert
-  :ensure t)
+  :ensure t
+  :commands alert)
 
-(require 'my-services)
-(require 'url)
+;;; Yasnippets
+(use-package yasnippet
+  :ensure t
+  :hook
+  (prog-mode . yas-global-mode))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
+
+;; Ctags
+(defun build-ctags ()
+  (interactive)
+  (message "building project tags")
+  (let ((root (eproject-root)))
+    (shell-command (concat "ctags -e -R --exclude=.git -f " root "TAGS " root)))
+  (message "tags built successfully"))
+
 (provide 'my-ide)
 ;;; my-ide.el ends here

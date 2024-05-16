@@ -1,68 +1,46 @@
 ;;; my-system --- System management
 ;;; Commentary: system settings
 
+;;; General settings
 (require 'my-packages)
-(require 'my-secrets)
 (require 'my-bookmarks)
+(require 'my-secrets)
 (require 'my-theme)
 (require 'my-daemon)
-
-(require 'my-docker)
-
-(require 'tramp)
-(setq
- tramp-default-method "ssh"
- tramp-ssh-controlmaster-options
-      (concat
-       "-S ~/tmp/.ssh/cm/%%h-%%p-%%r.sock "
-       (concat
-        "-o ControlPath=~/tmp/.ssh/cm/%%h-%%p-%%r.sock "
-        "-o ControlMaster=auto -o ControlPersist=yes"))
- )
-(add-to-list 'tramp-default-proxies-alist
-             '(nil "\\`root\\'" "/ssh:%h:"))
-
-(add-to-list 'tramp-default-proxies-alist
-             '((regexp-quote (system-name)) nil nil))
-
-
-;; Ctags
-(defun build-ctags ()
-  (interactive)
-  (message "building project tags")
-  (let ((root (eproject-root)))
-    (shell-command (concat "ctags -e -R --exclude=.git -f " root "TAGS " root)))
-  (message "tags built successfully"))
-
-
-;; (let (
-;;       (beancount-repo "~/Repositories/economicsbeancount-mode")
-;;       )
-;;   (unless (file-directory-p beancount-repo)
-;;     (add-to-list 'load-path beancount-repo)
-;;     (require 'beancount)
-;;     (add-to-list 'auto-mode-alist '("\\.beancount\\'" . beancount-mode))
-
-;;     ))
-
-(require 'my-ide)
-(require 'my-org)
-(require 'my-email)
-(require 'my-langtool)
-(require 'my-blog)
-;;(require 'my-750words)
-
-(require 'my-keys)
-
-
+(require 'my-keybindings)
 (require 'my-shell)
+(require 'my-networking)
 
-(use-package proc-net
+(setq
+ enable-remote-dir-locals t
+ ;; Follow symlinks without ask
+ vc-follow-symlinks t
+ ;; debug errors
+ debug-on-error t
+ debug-on-signal nil
+ )
+
+;;; Reading and writing tools
+(require 'my-org)
+(require 'my-langtool)
+(require 'my-email)
+(require 'my-blog)
+(use-package pocket-reader
   :ensure t)
 
-;; TODO
-;; (use-package pocket-reader
-;;   :ensure t)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; Automatic line breaking
+(add-hook 'text-mode-hook 'auto-fill-mode)
+(add-hook 'markdown-mode-hook 'auto-fill-mode)
+;; Fix acute
+(require 'iso-transl)
 
+;;; IT Tools
+(require 'my-ai)
+(require 'my-ansible)
+(require 'my-docker)
+(require 'my-gitlab)
+(require 'my-ide)
 
 (provide 'my-system)
+;;; my-system.el ends here
