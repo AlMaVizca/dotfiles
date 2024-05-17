@@ -24,6 +24,7 @@
 (global-set-key (kbd "M-s s") (lambda () () (interactive) (my-keys-ssh-flush)))
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "C-c C-r") 'compile)
 
 (provide 'my-keybindings)
 ;;; my-keybindings.el ends here

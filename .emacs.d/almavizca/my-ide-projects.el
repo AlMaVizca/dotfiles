@@ -38,6 +38,20 @@
 ;;       (call-interactively #'magit-fetch-from-upstream)
 ;;     (call-interactively #'magit-fetch-current)))
 
+(use-package consult-project-extra
+  :ensure t)
+
+(use-package consult-todo
+  :ensure t
+  :custom
+  (consult-todo--narrow '(
+                          (?t . "TODO")
+                          (?f . "FIXME")
+                          (?i . "IN-PROGRESS")
+                          (?b . "BUG")
+                          (?h . "HACK")
+                          ))
+  )
 
 (use-package compile-multi
   :ensure t
@@ -45,46 +59,6 @@
 
 (use-package projection-multi
   :ensure t)
-
-(use-package helm-make
-  ;;; Run projects based on the Makefile definition
-  :ensure t
-  :straight nil
-  :custom
-  (helm-make-comint t)
-  (helm-make-named-buffer t)
-  (helm-make-arguments "-j%d")
-  :config
-  (defcustom helm-make-parameters ""
-    "Pass these parameters as variables to `helm-make'"
-    :type 'string
-    :group 'helm-make)
-
-  (defun helm--make-construct-command (arg file)
-    "Construct the `helm-make-command'.
-
-ARG should be universal prefix value passed to `helm-make' or
-`helm-make-projectile', and file is the path to the Makefile or the
-ninja.build file."
-    (format (concat "%s%s -C %s " helm-make-arguments " %%s")
-            (if (= helm-make-niceness 0)
-                ""
-              (format "nice -n %d " helm-make-niceness))
-            (cond
-             ((equal helm--make-build-system 'ninja)
-              helm-make-ninja-executable)
-             (t
-              (concat helm-make-parameters " " helm-make-executable)))
-            (replace-regexp-in-string
-             "^/\\(scp\\|ssh\\).+?:.+?:" ""
-             (shell-quote-argument (file-name-directory file)))
-            (let ((jobs (abs (if arg (prefix-numeric-value arg)
-                               (if (= helm-make-nproc 0) (helm--make-get-nproc)
-                                 helm-make-nproc)))))
-              (if (> jobs 0) jobs 1))))
-
-  (global-set-key (kbd "C-c C-r") 'helm-make-projectile)
-  )
 
 (provide 'my-ide-projects)
 ;;; my-ide-projects.el ends here
