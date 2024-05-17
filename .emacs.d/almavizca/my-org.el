@@ -398,7 +398,6 @@
 
 (use-package toc-org
   :ensure t
-  :after org-mode
   )
 
 ;; (cl-defmethod org-roam-node-type ((node org-roam-node))

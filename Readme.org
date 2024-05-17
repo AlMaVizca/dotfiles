@@ -1,9 +1,18 @@
-* Dotfiles
+#+Title: My dotfiles
 
-This are my personal configurations, feel free to use them and suggest changes.
+Feel free to raise any issue or PR
 
-[[https://systemcrafters.net/managing-your-dotfiles/using-gnu-stow/][Here]] is a quick overview of how this works.
-** Installation
+**** Index                                                                        :TOC:
+- [[#installation][Installation]]
+- [[#what-configurations-does-it-have][What configurations does it have?]]
+  - [[#git][Git]]
+  - [[#ansible-for-socket-reuse-with-assh][Ansible for socket reuse with assh]]
+  - [[#zsh--powerline-with-extra-functions][Zsh + powerline with extra functions]]
+  - [[#tmux--yatsh][Tmux + yat.sh]]
+  - [[#emacs---many-things-][Emacs - many things 😆]]
+- [[#todo][ToDo]]
+
+* Installation
 
 1. Clone the repository, or download the package in `~/.dotfiles`
 2. Install all the configurations using /stow/
@@ -13,12 +22,51 @@ This are my personal configurations, feel free to use them and suggest changes.
    This will replicate the paths with symlinks.
 
 
-** What configurations does it have?
-- git - you will have to setup your user
-- Ansible for socket reuse with assh
-- Emacs - many things 😆
-- Npm
-- Python
-- Zsh + powerline
-  with extra functions
-- Tmux + yat.sh
+* What configurations does it have?
+** Git
+** Ansible for socket reuse with assh
+** Zsh + powerline with extra functions
+** Tmux + yat.sh
+** Emacs - many things 😆
+
+[[https://github.com/purcell][Steve Purcell]] mention on his emacs repository to make customizations on
+/.emacs.d/lisp/init-locals.el/ and I have chosen to modify that file as littly as
+possible. I'm adding a source path for emacs configurations and loading
+/my-system.el/ which is loading these different sections:
+
+#+begin_src mermaid :file .assets/structure.png
+  flowchart TD
+   init-local.el-->ms[/my-system.el\]
+   ms --> gs[/General settings block\]
+   ms --> rw[/Read & Write block\]
+   ms --> it[/IT tools\]
+   gs --> my-packages.el
+   gs --> my-bookmarks.el
+   gs --> my-secrets.el
+   gs --> my-theme.el
+   gs --> my-daemon.el
+   gs --> my-keybindings.el
+   gs --> my-shell.el
+   gs --> my-networking.el
+   rw --> my-org.el
+   rw --> my-langtool.el
+   rw --> my-email.el
+   rw --> my-blog.el
+   it --> my-ai.el
+   it --> my-ansible.el
+   it --> my-docker.el
+   it --> my-gitlab.el
+   it --> ide[/my-ide.el\]
+   it --> my-kubernetes.el
+   ide --> my-ide-html.el
+   ide --> my-ide-typescript.el
+   ide --> my-ide-projects.el
+
+#+end_src
+
+#+RESULTS:
+[[file:.assets/structure.png]]
+
+* ToDo
+- [ ] Decouple username configuration to env variable
+  This will allow to have a portable configuration
