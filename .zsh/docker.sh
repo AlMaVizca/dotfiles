@@ -19,24 +19,24 @@ dkiclean(){
     done
 }
 
-docker-get-last(){
+dk-get-last(){
     export DOCKER_LAST=$(docker ps | cut -d\  -f1 | awk 'NR==2')
     ## --filter 'status=running'
     }
 
-docker-ip() {
-    docker-get-last
+dk-ip() {
+    dk-get-last
     docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$DOCKER_LAST"
 }
 
 docker-inspect() {
-    docker-get-last
+    dk-get-last
     docker inspect --format '{{ .NetworkSettings }}' "$DOCKER_LAST"
 }
 
 docker-run(){
     docker run -t -d $@
-    docker-ip
+    dk-ip
     echo $DOCKER_LAST
 
 }

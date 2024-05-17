@@ -17,15 +17,16 @@ fi
 # ZSH_AUTOENV=/home/krahser/Repositories/zsh-autoenv/autoenv.zsh
 # [[ -d ${ZSHAUTOENV}  ]] && source ${ZSH_AUTOENV}
 
-
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 # source ~/.xsh
 setopt cd_able_vars
 [[ -r ~/.zsh.bmk ]] && source ~/.zsh.bmk
 
-if [[ -f ${ZSH_AUTO} ]]; then
-    source ${ZSH_AUTO}
-fi
+for plugin in $(env | awk -F "=" '{print $1}' | grep "ZSH_PLUGIN.*"); do
+    if [[ -f ${(P)plugin} ]]; then
+        source ${(P)plugin}
+    fi
+done
 
 if [[ -d ${dotfiles_zsh} ]]; then
     for each in $(ls ${dotfiles_zsh}); do
