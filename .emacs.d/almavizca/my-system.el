@@ -41,6 +41,7 @@
 (require 'my-docker)
 (require 'my-gitlab)
 (require 'my-ide)
+(require 'my-kubernetes)
 
 (provide 'my-system)
 ;;; my-system.el ends here
