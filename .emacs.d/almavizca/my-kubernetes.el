@@ -1,5 +1,6 @@
 ;;; my-kubernetes --- Configurations
 ;;; Commentary:
+;;; Code:
 
 (use-package k8s-mode
   :ensure t

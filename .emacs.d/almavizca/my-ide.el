@@ -1,14 +1,25 @@
 ﻿;;; my-ide --- Configurations
 ;;; Commentary:
 
+
 (use-package ivy
   :ensure t
+  :custom
+  (ivy-use-virtual-buffers t)
+  (enable-recursive-minibuffers t)
+  (ivy-use-selectable-prompt t)
   :config
   (ivy-mode)
   )
+
 (use-package ivy-rich
   :ensure t)
 
+(use-package ivy-fuz
+  :ensure t)
+
+(use-package ivy-yasnippet
+  :ensure t)
 
 (use-package fill-column-indicator
   ;; Display a line at 80 characters width

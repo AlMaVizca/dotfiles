@@ -51,6 +51,15 @@
 (use-package all-the-icons-nerd-fonts
   :ensure t)
 
+(use-package nerd-icons-completion
+  :ensure t)
+
+(use-package nerd-icons-ivy-rich
+  :ensure t)
+
+(use-package nerd-icons-dired
+  :ensure t)
+
 (use-package counsel
   :ensure t)
 
