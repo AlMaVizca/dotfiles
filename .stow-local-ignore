@@ -21,3 +21,6 @@ _darcs
 ^/.assets
 ^/LICENSE
 ^/COPYING
+
+# Systemd must be files
+^/.config/systemd/user
