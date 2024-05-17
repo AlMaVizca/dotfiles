@@ -2,27 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 
-;;; ToDo: Setup projectile
-;; (projectile-project-search-path repositories)
+(use-package projectile
+  :ensure t
+  :custom
+  ((projectile-project-root-files '("Makefile"))
+   (projectile-completion-system 'ivy)
+   (projectile-switch-project-action #'projectile-dired)
+   (projectile-per-project-compilation-buffer t)
+   (shell-command-switch "-ic")
+   ))
 
-;; (use-package projectile
-;;   :diminish projectile-mode
-;;   :config (projectile-mode)
-;;   :custom
-;;   (
-;;    (projectile-completion-system 'ivy)
-;;    (projectile-switch-project-action #'projectile-dired)
-;;    (projectile-per-project-compilation-buffer t)
-;;    (shell-command-switch "-ic")
-;;    )
-;;   :bind-keymap
-;;   ("C-c p" . projectile-command-map)
-;;   )
-
-;; (use-package counsel-projectile
-;;   :ensure t
-;;   :config (counsel-projectile-mode)
-;;   )
+(use-package counsel-projectile
+  :ensure t
+  :config (counsel-projectile-mode))
 
 ;; (projectile-register-project-type 'npm '("package.json")
 ;;                                   :project-file "package.json"
@@ -38,20 +30,6 @@
 ;;       (call-interactively #'magit-fetch-from-upstream)
 ;;     (call-interactively #'magit-fetch-current)))
 
-(use-package consult-project-extra
-  :ensure t)
-
-(use-package consult-todo
-  :ensure t
-  :custom
-  (consult-todo--narrow '(
-                          (?t . "TODO")
-                          (?f . "FIXME")
-                          (?i . "IN-PROGRESS")
-                          (?b . "BUG")
-                          (?h . "HACK")
-                          ))
-  )
 
 (use-package compile-multi
   :ensure t
