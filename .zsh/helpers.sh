@@ -12,3 +12,5 @@ snapprune(){
             sudo snap remove "$snapname" --revision="$revision"
         done
 }
+
+source <(argocd completion zsh)
