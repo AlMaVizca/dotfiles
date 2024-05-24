@@ -39,10 +39,10 @@ zstyle ':prezto:load' pmodule \
   'prompt' \
   'archive' \
   'docker' \
-  'contrib-kubernetes' \
   'git' \
   'emacs' \
   'command-not-found' \
+  'contrib-kubernetes' \
   'prompt'
 
 #

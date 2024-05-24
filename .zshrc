@@ -17,8 +17,10 @@ fi
 # ZSH_AUTOENV=/home/krahser/Repositories/zsh-autoenv/autoenv.zsh
 # [[ -d ${ZSHAUTOENV}  ]] && source ${ZSH_AUTOENV}
 
+source /opt/asdf-vm/asdf.sh
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-# source ~/.xsh
+
+
 setopt cd_able_vars
 [[ -r ~/.zsh.bmk ]] && source ~/.zsh.bmk
 
