@@ -1,5 +1,0 @@
-[global]
-load_dotenv=true
-
-[whitelist]
-prefix = [ "~/Repositories/AlMaVizca/caches", "~/Repositories/AlMaVizca/dev-proxy", "~/Repositories/machine_bootstrap", "~/Repositories/k3s-ansible", "~/Repositories/AlMaVizca/odoo/", "~/Repositories/mikroways/argo-gitops-demo-example","/home/krahser/Repositories/AlMaVizca/nestjs-starter/", "/home/krahser/Repositories/AlMaVizca/youtube-manager" ]
