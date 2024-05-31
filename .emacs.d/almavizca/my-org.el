@@ -400,6 +400,13 @@
   :ensure t
   )
 
+(use-package org-ref
+  :ensure t)
+
+;; TODO
+;; (use-package org-sidebar
+;;   :ensure t)
+
 ;; (cl-defmethod org-roam-node-type ((node org-roam-node))
 ;;   "Return the TYPE of NODE."
 ;;   (condition-case nil

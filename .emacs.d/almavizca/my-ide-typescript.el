@@ -77,8 +77,8 @@
          )
   :init (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
-;; (use-package js2-refactor
-;;   :ensure t)
+(use-package js2-refactor
+  :ensure t)
 
 (provide 'my-ide-typescript)
 ;;; my-ide-typescript.el ends here
