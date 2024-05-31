@@ -126,6 +126,27 @@
   :hook
   ((typescript-mode . flycheck-mode)))
 
+(use-package flymake-jslint
+  :ensure t)
+
+(use-package flymake-json
+  :ensure t)
+
+(use-package flymake-less
+  :ensure t)
+
+(use-package flymake-python-pyflakes
+  :ensure t)
+
+(use-package flymake-shell
+  :ensure t)
+
+(use-package flymake-yaml
+  :ensure t)
+
+(use-package ioccur
+  :ensure t)
+
 (require 'my-ide-projects)
 
 ;; TODO: perspective
