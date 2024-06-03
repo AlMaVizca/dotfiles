@@ -28,7 +28,9 @@ _git_path(){
     git rev-parse --show-toplevel 2>/dev/null
 }
 
-unalias cd
+if alias cd >/dev/null; then
+  unalias cd
+fi
 cd(){
     # Save previous path and change directory
     export OLDPWD=$(pwd)

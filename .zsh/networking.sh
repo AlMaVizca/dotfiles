@@ -22,3 +22,7 @@ eth_forward(){
 network(){
     sudo systemctl $1 NetworkManager
 }
+
+dnsmasq-offline(){
+    sudo /usr/bin/dnsmasq --no-resolv --keep-in-foreground --no-hosts --bind-interfaces --pid-file=/var/run/NetworkManager/dnsmasq.pid --listen-address=127.0.0.1 --cache-size=400 --clear-on-reload --conf-file=/dev/null --enable-dbus=org.freedesktop.NetworkManager.dnsmasq --conf-dir=/etc/NetworkManager/dnsmasq.d
+}
