@@ -3,11 +3,8 @@
 ;;; Code:
 (require 'bookmark)
 (setq-default bookmark-default-file "~/.dotfiles-secrets/.local/emacs.d/bookmarks.el")
+(setq bookmark-save-flag 1)
 (bookmark-load bookmark-default-file t)
-
-(defadvice bookmark-write-file
-    (after local-directory-bookmarks-to-zsh-advice activate)
-  (local-directory-bookmarks-to-zsh))
 
 (defun local-directory-bookmarks-to-zsh ()
   (interactive)
@@ -51,6 +48,13 @@
     (let ((backup-inhibited t)) (save-buffer))
     (kill-buffer (current-buffer))))
 
+
+;;(advice-add 'bookmark-write-file :after #'local-directory-bookmarks-to-zsh)
+(defadvice bookmark-write-file
+    (after local-directory-bookmarks-to-zsh-advice activate)
+  (local-directory-bookmarks-to-zsh))
+
+;; TODO
 ;; Review load bookmars from C-x C-f
 ;; (defun bookmark-to-abbrevs ()
 ;;   "Create abbrevs based on `bookmark-alist'."
@@ -58,6 +62,11 @@
 ;;     (let* ((name (car bookmark))
 ;;            (file (bookmark-get-filename name)))
 ;;       (define-abbrev global-abbrev-table name file))))
+
+(defadvice bookmark-jump (after bookmark-jump activate)
+  (let ((latest (bookmark-get-bookmark bookmark)))
+    (setq bookmark-alist (delq latest bookmark-alist))
+    (add-to-list 'bookmark-alist latest)))
 
 (provide 'my-bookmarks)
 ;;; my-bookmarks ends here
