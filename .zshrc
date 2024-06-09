@@ -32,6 +32,6 @@ done
 
 if [[ -d ${dotfiles_zsh} ]]; then
     for each in $(ls ${dotfiles_zsh}); do
-       source ${dotfiles_zsh}/${each}
+       source ${dotfiles_zsh}${each}
    done
 fi

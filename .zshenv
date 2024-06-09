@@ -7,3 +7,4 @@ export dotfiles_zsh=${HOME}/.zsh
 export PODMAN_SOCKET_PATH=$XDG_RUNTIME_DIR/podman/podman.sock
 export PODMAN_SOCKET="unix://${PODMAN_SOCKET_PATH}"
 export FREEPLANE_JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
+export MK_DIR="~/.mk-libs/src"
