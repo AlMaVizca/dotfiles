@@ -25,7 +25,6 @@ Feel free to raise any issue or PR
 * What configurations does it have?
 ** Git
 ** Ansible for socket reuse with assh
-** Zsh + powerline with extra functions
 ** Tmux + yat.sh
 ** Emacs - many things 😆
 
@@ -67,6 +66,10 @@ possible. I'm adding a source path for emacs configurations and loading
 #+RESULTS:
 [[file:.assets/structure.png]]
 
+
+I'm a big fan of [[https://www.emacswiki.org/emacs/BookMarks][bookmarks]], and I get to use them also with my shell -> [[https://www.emacswiki.org/emacs/BookMarks#h5o-9][syncing bookmarks with zsh]]
+
+** Zsh + powerline with extra functions
 * ToDo
 - [ ] Decouple username configuration to env variable
   This will allow to have a portable configuration
