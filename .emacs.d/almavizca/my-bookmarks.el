@@ -29,8 +29,9 @@
 
 ;;(advice-add 'bookmark-write-file :after #'local-directory-bookmarks-to-zsh)
 (defadvice bookmark-write-file
-    (after local-directory-bookmarks-to-zsh-advice)
-  (local-directory-bookmarks-to-zsh))
+    (after local-directory-bookmarks-to-zsh-advice last activate)
+  (local-directory-bookmarks-to-zsh)
+  )
 
 ;; TODO
 ;; Review load bookmars from C-x C-f
