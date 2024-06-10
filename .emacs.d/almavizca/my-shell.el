@@ -20,7 +20,6 @@
   :bind (
          ("º" . multi-vterm-dedicated-toggle)
          ("C-c º" . multi-vterm-project)
-         ("C-c s" . multi-vterm)
          ("C-<prior>" . multi-vterm-prev)
          ("C-<next>" . multi-vterm-next)
          ([mouse-1] . nil))

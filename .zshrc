@@ -37,7 +37,8 @@ if [[ -d ${dotfiles_secrets_zsh} ]]; then
     load_zsh_dir ${dotfiles_secrets_zsh}
 fi
 
-if [[ ( -n $INSIDE_EMACS ) ]]; then
+INSIDE_EMACS_SHELL_VERSION=$(emacs --version | awk '{version = sprintf("%s,comint",$2)} END {print version}')
+if [[ ${INSIDE_EMACS} = ${INSIDE_EMACS_SHELL_VERSION} ]]; then
     unsetopt zle
     export PS1=${PROMPT4}
     return
