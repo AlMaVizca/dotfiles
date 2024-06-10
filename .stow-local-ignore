@@ -24,3 +24,6 @@ _darcs
 
 # Systemd must be files
 ^/.config/systemd/user
+
+#Zsh custom scripts will be loaded withouth symlink
+\.zsh

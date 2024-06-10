@@ -3,19 +3,12 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# if [[ ( $TERM == "dumb" ) && ( -z $INSIDE_EMACS ) ]]; then
-#     unsetopt zle
-#     PS1='$ '
-#     return
-# fi
-
 
 if alias cd >/dev/null; then
   unalias cd
 fi
 
-# ZSH_AUTOENV=/home/krahser/Repositories/zsh-autoenv/autoenv.zsh
-# [[ -d ${ZSHAUTOENV}  ]] && source ${ZSH_AUTOENV}
+autoload -Uz compinit && compinit
 
 source /opt/asdf-vm/asdf.sh
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -30,8 +23,22 @@ for plugin in $(env | awk -F "=" '{print $1}' | grep "ZSH_PLUGIN.*"); do
     fi
 done
 
+load_zsh_dir(){
+    for each in $(ls -d $1*); do
+        source ${each}
+    done
+}
+
 if [[ -d ${dotfiles_zsh} ]]; then
-    for each in $(ls ${dotfiles_zsh}); do
-       source ${dotfiles_zsh}${each}
-   done
+    load_zsh_dir ${dotfiles_zsh}
+fi
+
+if [[ -d ${dotfiles_secrets_zsh} ]]; then
+    load_zsh_dir ${dotfiles_secrets_zsh}
+fi
+
+if [[ ( -n $INSIDE_EMACS ) ]]; then
+    unsetopt zle
+    export PS1=${PROMPT4}
+    return
 fi
