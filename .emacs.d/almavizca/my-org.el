@@ -306,7 +306,7 @@
   (org-roam-capture-templates
    '(
      ("b" "blog" plain "%?"
-      :target (file+head "blog/articles/${slug}.org"
+      :target (file+head "blog/${slug}.org"
                          "#+title: ${title}\n"))
 
      ("d" "Default" plain "%?"

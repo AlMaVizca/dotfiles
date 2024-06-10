@@ -1,5 +1,6 @@
 ;;; my-shell -- Shell customizations
-;;; Commentary: Special shell configurations
+;;; Commentary:
+;; Special shell configurations
 
 ;;; Code:
 (use-package vterm
@@ -18,7 +19,7 @@
   :commands multi-vterm multi-vterm-dedicated-toggle
   :bind (
          ("º" . multi-vterm-dedicated-toggle)
-         ("C-c t" . multi-vterm-project)
+         ("C-c º" . multi-vterm-project)
          ("C-c s" . multi-vterm)
          ("C-<prior>" . multi-vterm-prev)
          ("C-<next>" . multi-vterm-next)
