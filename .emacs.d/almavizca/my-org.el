@@ -71,7 +71,9 @@
 
   (require 'ox-freemind)
   (require 'ox-beamer)
-
+  (use-package ox-gfm
+    :ensure t)
+  (require 'ox-gfm)
 
   (setq
 
@@ -168,7 +170,7 @@
 
   ;; Increase the size of various headings
   ;; ttc-iosevka-aile
-  (set-face-attribute 'org-document-title nil :font "Iosevka Aile" :weight 'bold :height 1.3)
+  (set-face-attribute 'org-document-title t :font "Iosevka Aile" :weight 'bold :height 1.3)
   (dolist (face '((org-level-1 . 1.2)
                   (org-level-2 . 1.1)
                   (org-level-3 . 1.05)
