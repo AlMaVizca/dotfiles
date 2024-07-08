@@ -18,7 +18,9 @@
     (set-face-attribute 'mode-line-inactive nil :underline  line)
     (set-face-attribute 'mode-line          nil :box        nil)
     (set-face-attribute 'mode-line-inactive nil :box        nil)
-    (set-face-attribute 'mode-line-inactive nil :background "#163a43")))
+    (set-face-attribute 'mode-line-inactive nil :background "#163a43"))
+  (load-theme 'solarized-selenized-dark t)
+  )
 
 ;; TODO
 ;; (use-package moody

@@ -41,7 +41,6 @@
 (use-package lsp-mode
   :ensure t
   :straight t
-  :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l") ;; Or 'C-l', 's-l'
   :config
