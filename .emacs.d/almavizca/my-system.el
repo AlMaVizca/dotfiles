@@ -43,5 +43,15 @@
 (require 'my-ide)
 (require 'my-kubernetes)
 
+(use-package xclip
+  :ensure t
+  :config
+  (xclip-mode +1)
+  (setq
+   x-select-enable-clipboard t
+   x-select-enable-primary t
+   x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)
+   x-stretch-cursor t))
+
 (provide 'my-system)
 ;;; my-system.el ends here

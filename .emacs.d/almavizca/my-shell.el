@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;; Special shell configurations
 
+(setq comint-terminfo-terminal "eterm-color")
 ;;; Code:
 (use-package vterm
   :ensure t
