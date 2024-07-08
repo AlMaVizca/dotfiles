@@ -38,11 +38,24 @@ cd(){
     [[ -n $(_git_path) ]] && export GIT_LOCAL_DIR=$(_git_path) || export GIT_LOCAL_DIR=''
  }
 
+findMakefile(){
+    MAKEFILE_PATH=$1
+    while [[ ! -f ${MAKEFILE_PATH}/Makefile && ${MAKEFILE_PATH} != '/' ]]; do
+        MAKEFILE_PATH=$(dirname ${MAKEFILE_PATH})
+    done
+    echo $MAKEFILE_PATH
+}
+
 ci(){
+    MAKEFILE_PATH=$(pwd)
     if [ -f Makefile ]; then
         make "$@"
+    # Prioritize respository makefile execution
     elif [ -f "${GIT_LOCAL_DIR}/Makefile" ]; then
         make -C ${GIT_LOCAL_DIR} "$@"
+    elif [ ! -f ${MAKEFILE_PATH}/Makefile ]; then
+        MAKEFILE_PATH=$(findMakefile ${MAKEFILE_PATH})
+        make -C ${MAKEFILE_PATH} "$@"
     else
         echo "Makefile not found."
     fi

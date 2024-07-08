@@ -12,6 +12,11 @@
    (shell-command-switch "-ic")
    ))
 
+;; (defun zsh-shell-mode-setup ()
+;;   (setq-local comint-process-echoes t))
+;; (add-hook 'shell-mode-hook #'zsh-shell-mode-setup)
+;; (add-hook 'term-mode-hook 'compilation-shell-minor-mode)
+
 (use-package counsel-projectile
   :ensure t
   :config (counsel-projectile-mode))
