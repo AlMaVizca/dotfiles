@@ -13,7 +13,12 @@
               ([mouse-3] . nil)
               ([mouse-4] . nil)
               ([mouse-5] . nil)
-              ))
+              )
+  :custom
+  (vterm-always-compile-module t)
+  :config
+  (define-key vterm-mode-map (kbd "C-q") #'vterm-send-next-key)
+  )
 
 (use-package multi-vterm
   :ensure t
