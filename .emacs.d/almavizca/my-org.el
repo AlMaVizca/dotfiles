@@ -47,6 +47,20 @@
   :defer t
   :hook
   (org-mode . dw/org-mode-setup)
+  :custom
+  (org-directory "~/Repository/Notes")
+  (org-modules
+   '(org-crypt
+     org-habit
+     ))
+  (org-refile-targets '((nil :maxlevel . 1)
+                        (org-agenda-files :maxlevel . 1)))
+  (org-agenda-files '("~/Repositories/Notes/"))
+  (org-agenda-list)
+  (org-outline-path-complete-in-steps nil)
+  (org-refile-use-outline-path t)
+  (epa-file-encrypt-to "aldo.vizcaino87@gmail.com")
+
   :config
   (setq org-ellipsis " ▾"
         org-hide-emphasis-markers t
@@ -75,21 +89,6 @@
     :ensure t)
   (require 'ox-gfm)
 
-  (setq
-
-   org-modules
-   '(org-crypt
-     org-habit
-     )
-
-   org-refile-targets '((nil :maxlevel . 1)
-                        (org-agenda-files :maxlevel . 1))
-
-   org-outline-path-complete-in-steps nil
-   org-refile-use-outline-path t
-
-   epa-file-encrypt-to "aldo.vizcaino87@gmail.com"
-   )
 
   (use-package ob-typescript
     :ensure t)
