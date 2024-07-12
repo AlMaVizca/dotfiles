@@ -202,5 +202,14 @@
     (shell-command (concat "ctags -e -R --exclude=.git -f " root "TAGS " root)))
   (message "tags built successfully"))
 
+(use-package wakatime-mode
+  :ensure t
+  :custom
+  (wakatime-api-key (password-store-get "Work/wakatime.com/token"))
+  (wakatime-cli-path "/home/krahser/.asdf/shims/wakatime")
+  :config
+  (global-wakatime-mode t)
+  )
+
 (provide 'my-ide)
 ;;; my-ide.el ends here
