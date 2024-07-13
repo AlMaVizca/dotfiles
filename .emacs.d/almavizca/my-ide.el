@@ -38,15 +38,20 @@
 
 (use-package magit
   :ensure t
-  :straight t
   )
 
-;; (use-package magit-todos
-;;   :ensure t
-;;   :after magit
-;;   :config
-;;   (magit-todos-mode)
-;;   )
+(use-package magit-section
+  :ensure t)
+
+(use-package magit-todos
+  :ensure t
+  ;; Notes
+  ;;; There is an error due to (cl-defun magit-todos--git-diff-callback (&key magit-status-buffer results-regexp search-regexp-elisp process heading exclude-globs &allow-other-keys
+  ;;; receiving heading as nil and is overwriting magit-todos-section-heading
+  ;;; Causing propertize to be called with a nil string
+  :config
+  (magit-todos-mode)
+  )
 
 
 ;; (use-package magithub
@@ -54,10 +59,13 @@
 ;;   :ensure t
 ;;   :config (magithub-feature-autoinject t))
 
-;; (use-package forge
-;;   :ensure t
-;;   :after magit
-;;   )
+
+(use-package forge
+  :ensure t
+  :after magit
+  ;;; modify dimmer to avoid error with reset variable
+  ;; https://github.com/gonewest818/dimmer.el/issues/68#issuecomment-2053620377
+  )
 ;; (require 'my-dashboard)
 
 (use-package company
