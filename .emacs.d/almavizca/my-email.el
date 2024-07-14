@@ -4,43 +4,73 @@
 (use-package mu4e
   :ensure nil
   ;; :load-path "/usr/share/emacs/site-lisp/mu4e/"
-  ;; :defer 60
-  :commands mu4e
   :config
-
   (setq
    ;; This is set to 't' to avoid mail syncing issues when using mbsync
    mu4e-change-filenames-when-moving t
-   ;; Refresh mail using isync every 10 minutes
+   ;; Refresh mail using isync every 10 minutes, settings are on dotfiles-secrets
    mu4e-update-interval (* 10 60)
    mu4e-get-mail-command "mbsync -a"
    mu4e-maildir "~/Mail"
-   mu4e-mu-debug t
-   ;; Folders
-   mu4e-drafts-folder "/[Gmail]/Drafts"
-   mu4e-sent-folder   "/[Gmail]/Sent Mail"
-   mu4e-refile-folder "/[Gmail]/All Mail"
-   mu4e-trash-folder  "/[Gmail]/Trash"
+   mu4e-mu-debug nil
    ;; Format
    mu4e-compose-format-flowed t
-   ;; Shortcuts
-   mu4e-maildir-shortcuts
-   '((:maildir "/Inbox"    :key ?i)
-     (:maildir "/[Gmail]/Sent Mail" :key ?s)
-     (:maildir "/[Gmail]/Trash"     :key ?t)
-     (:maildir "/[Gmail]/Drafts"    :key ?d)
-     (:maildir "/[Gmail]/All Mail"  :key ?a))
-   ;; User
-   user-mail-address "aldo.vizcaino87@gmail.com"
-   user-full-name "Aldo María Vizcaino"
-   ;; smtp
-   smtpmail-smtp-server "smtp.gmail.com"
-   smtpmail-smtp-user "aldo.vizcaino87@gmail.com"
+
+   ;; Smtp defaults and gpg
    smtpmail-smtp-service 465
    smtpmail-stream-type  'ssl
    message-send-mail-function 'smtpmail-send-it
    mml-secure-openpgp-signers '("AA9C5629F91296F6FDC58C3095E7D44EAF29704D")
+
+
+   ;; contexts
+   mu4e-contexts
+   `(
+     ;; Work account
+     ,(make-mu4e-context
+       :name "Personal"
+       :match-func
+       (lambda (msg)
+         (when msg
+           (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+       :vars `(
+               (user-mail-address . ,(password-store-get-field "Personal/mail-personal" "login"))
+               (user-full-name    . ,(password-store-get-field "Personal/mail-personal" "fullname"))
+               ;; smtp
+               (smtpmail-smtp-server . ,(password-store-get-field "Personal/mail-personal" "smtp"))
+               (smtpmail-smtp-user   . ,(password-store-get-field "Personal/mail-personal" "login"))
+               (mu4e-drafts-folder . "/Gmail/[Gmail]/Drafts")
+               (mu4e-sent-folder   . "/Gmail/[Gmail]/Sent Mail")
+               (mu4e-refile-folder . "/Gmail/[Gmail]/All Mail")
+               (mu4e-trash-folder  . "/Gmail/[Gmail]/Trash")))
+     ,(make-mu4e-context
+       :name "Work"
+       :match-func
+       (lambda (msg)
+         (when msg
+           (string-prefix-p "/Almavizca" (mu4e-message-field msg :maildir))))
+       :vars `(
+               (user-mail-address . ,(password-store-get-field "Personal/mail-work" "login"))
+               (user-full-name . ,(password-store-get-field "Personal/mail-work" "fullname"))
+               ;; smtp
+               (smtpmail-smtp-server . ,(password-store-get-field "Personal/mail-work" "smtp"))
+               (smtpmail-smtp-user . ,(password-store-get-field "Personal/mail-work" "login"))
+               (mu4e-drafts-folder  . "/Almavizca/Drafts")
+               (mu4e-sent-folder  . "/Almavizca/Sent")
+               (mu4e-refile-folder  . "/Almavizca/")
+               (mu4e-trash-folder  . "/Almavizca/Trash")))
+     )
+
+   ;; Shortcuts
+   mu4e-maildir-shortcuts
+   '((:maildir "/Gmail/Inbox"    :key ?g)
+     (:maildir "/Gmail/[Gmail]/Sent Mail" :key ?s)
+     (:maildir "/Gmail/[Gmail]/Trash"     :key ?t)
+     (:maildir "/Gmail/[Gmail]/Drafts"    :key ?d)
+     (:maildir "/Almavizca/Inbox"  :key ?a))
+   ;; User
    )
+  (add-to-list 'mu4e-bookmarks '("m:/Almavizca/Inbox or m:/Gmail/Inbox" "All Inboxes" ?i))
 
   (add-hook 'message-send-hook 'mml-secure-message-sign-pgpmime)
   (add-hook 'mu4e-compose-mode-hook
