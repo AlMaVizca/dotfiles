@@ -19,11 +19,8 @@
   (call-process "assh" nil 0 nil "sockets" "flush")
   )
 
-(global-set-key (kbd "C-x p") (lambda () () (interactive) (NoSqlClient)))
-(global-set-key (kbd "C-º") (lambda () () (interactive) (neotree)))
+(global-set-key (kbd "C-x p n") (lambda () () (interactive) (NoSqlClient)))
 (global-set-key (kbd "M-s s") (lambda () () (interactive) (my-keys-ssh-flush)))
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
 
 (provide 'my-keybindings)
 ;;; my-keybindings.el ends here

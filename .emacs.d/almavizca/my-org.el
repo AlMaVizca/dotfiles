@@ -417,7 +417,12 @@
 ;;          (file-relative-name (org-roam-node-file node) org-roam-directory))))
 ;;     (error "")))
 
-
+(use-package org-cliplink
+  "Insert links with org-mode format from the clipboard"
+  :ensure t
+  :config
+  (global-set-key (kbd "C-x p i") 'org-cliplink)
+  )
 
 (provide 'my-org)
 ;;; my-org ends here
