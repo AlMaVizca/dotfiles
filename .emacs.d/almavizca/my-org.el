@@ -418,11 +418,25 @@
 ;;     (error "")))
 
 (use-package org-cliplink
-  "Insert links with org-mode format from the clipboard"
+  ;; Insert links with org-mode format from the clipboard
   :ensure t
   :config
   (global-set-key (kbd "C-x p i") 'org-cliplink)
   )
+
+(use-package org-super-agenda
+  :ensure t
+  :custom
+  (org-super-agenda-groups
+   '((:auto-map (lambda (item)
+                  (-when-let* ((marker (or (get-text-property 0 'org-marker item)
+                                           (get-text-property 0 'org-hd-marker item)))
+                               (file-path (->> marker marker-buffer buffer-file-name))
+                               (directory-name (->> file-path file-name-directory directory-file-name file-name-nondirectory)))
+                    (concat "Directory: " directory-name))))))
+  (org-super-agenda-mode t)
+  )
+
 
 (provide 'my-org)
 ;;; my-org ends here
