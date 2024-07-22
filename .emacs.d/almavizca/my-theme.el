@@ -4,10 +4,12 @@
 
 (use-package doom-modeline
   ;; Run nerd-icons-install-fonts
-  :ensure  t
-  :init
-  (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 10)))
+  :ensure t
+  :custom (
+           (doom-modeline-height 10)
+           (doom-modeline-mode 1)
+           )
+  )
 
 (use-package solarized-theme
   :ensure t

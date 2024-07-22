@@ -7,7 +7,7 @@
 (setq
  daemon-name (if (not (daemonp)) "no daemon" (daemonp))
  desktop-save nil
- initial-buffer-choice (bookmark-get-filename "ToDo")
+ initial-buffer-choice (bookmark-get-filename "Mine")
  frame-title-format daemon-name
  repositories (bookmark-get-filename "repos")
  )
