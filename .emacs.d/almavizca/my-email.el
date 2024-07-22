@@ -24,6 +24,7 @@
 
 
    ;; contexts
+   mu4e-context-policy 'pick-first
    mu4e-contexts
    `(
      ;; Work account
