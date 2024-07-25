@@ -27,11 +27,20 @@ Feel free to raise any issue or PR
 ** Ansible for socket reuse with assh
 ** Tmux + yat.sh
 ** Emacs - many things 😆
-
+This configurations use [[https://github.com/purcell/emacs.d][purcell/emacs.d: An Emacs configuration bundle
+with batteries included]] as a basic layer, and I'm adding my own customizations.
 [[https://github.com/purcell][Steve Purcell]] mention on his emacs repository to make customizations on
 /.emacs.d/lisp/init-locals.el/ and I have chosen to modify that file as littly as
-possible. I'm adding a source path for emacs configurations and loading
-/my-system.el/ which is loading these different sections:
+possible.
+*Note*: There is one modification required to Purcell's repo, [[https://github.com/purcell/emacs.d/issues/863][purcell/emacs.d#863
+Relocate init-preload-local]], in order to use elpaca.
+Because it's only a string relocation I've decided not to fork it. Yet if you
+want to use this settings, please make the change.
+In it, I'm adding a source path for emacs configurations, and loading the
+packages configurations along with org-mode settings.
+Then the startup process continues loading Purcell's settings, and later
+init-local.el to load my-system.el
+/my-system.el/ is loading these different sections:
 
 #+begin_src mermaid :file .assets/structure.png
   flowchart TD
