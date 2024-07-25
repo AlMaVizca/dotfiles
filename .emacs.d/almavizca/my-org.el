@@ -218,79 +218,28 @@
   (add-to-list 'org-structure-template-alist '("go" . "src go"))
   (add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
   (add-to-list 'org-structure-template-alist '("json" . "src json"))
-
-
-  (use-package org-pomodoro
-    :ensure t
-    :after org
-    :config
-    (setq org-pomodoro-start-sound "~/.dotfiles/.emacs.d/sounds/focus_bell.wav")
-    (setq org-pomodoro-short-break-sound "~/.dotfiles/.emacs.d/sounds/three_beeps.wav")
-    (setq org-pomodoro-long-break-sound "~/.dotfiles/.emacs.d/sounds/three_beeps.wav")
-    (setq org-pomodoro-finished-sound "~/.dotfiles/.emacs.d/sounds/meditation_bell.wav")
-    )
-
-  (defun dw/search-org-files ()
-    (interactive)
-    (counsel-rg "" roam-directory nil "Search Notes: "))
   )
-
-(defun org-roam-folders ()
-
-  (setq
-   roam-journal (concat roam-directory "journal")
-   roam-main (concat roam-directory "main")
-   roam-personal (concat roam-directory "personal")
-   roam-nature (concat roam-directory "nature")
-   roam-blog (bookmark-get-filename "blog")
-   )
-
-  (unless (file-exists-p roam-directory)
-    (make-directory roam-directory))
-  (unless (file-exists-p roam-journal)
-    (make-directory roam-journal))
-  (unless (file-exists-p roam-main)
-    (make-directory roam-main))
-  (unless (file-exists-p roam-personal)
-    (make-directory roam-personal))
-  (unless (file-exists-p roam-nature)
-    (make-directory roam-nature))
-  (unless (file-exists-p roam-blog)
-    (make-directory roam-blog))
-
-  )
-(org-roam-folders)
-
-
 
 (use-package org-roam
   :ensure t
   :defer t
   :init
-  ;; defined in my daemon
   (org-roam-folders)
   (require 'bookmark)
   :config
   (org-roam-db-autosync-mode)
-
-  (use-package emacsql-sqlite
-    :ensure t)
-
   :bind (
          ("C-c n l"   . org-roam-buffer-toggle)
          ("C-c n f"   . org-roam-node-find)
          ("C-c n i"   . org-roam-node-insert)
          ("C-c n c"   . org-roam-capture)
          ("C-c n g"   . org-roam-graph)
-
          ("C-c n d"   . org-roam-dailies-goto-date)
          ("C-c n j"   . org-roam-dailies-capture-today)
          ("C-c n C r" . org-roam-dailies-capture-tomorrow)
          ("C-c n t"   . org-roam-dailies-goto-today)
          ("C-c n y"   . org-roam-dailies-goto-yesterday)
          ("C-c n r"   . org-roam-dailies-goto-tomorrow)
-
-
          ("C-c n I"   . org-roam-insert-immediate)
          )
   :custom
