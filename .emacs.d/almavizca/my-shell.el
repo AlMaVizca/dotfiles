@@ -2,7 +2,9 @@
 ;;; Commentary:
 ;; Special shell configurations
 
-(setq comint-terminfo-terminal "eterm-color")
+(setq comint-terminfo-terminal "eterm-color"
+      vterm-always-compile-module t
+      )
 ;;; Code:
 (use-package vterm
   :ensure t
