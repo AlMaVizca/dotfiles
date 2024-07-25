@@ -4,6 +4,7 @@
 (use-package mu4e
   :ensure nil
   ;; :load-path "/usr/share/emacs/site-lisp/mu4e/"
+  :after password-store
   :config
   (setq
    ;; This is set to 't' to avoid mail syncing issues when using mbsync

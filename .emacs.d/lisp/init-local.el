@@ -1,9 +1,7 @@
-;;; package -- sumary
+;;; init-local -- My customizations
+;;; Commentary:
 
 ;;; Code:
-;; define frame title format
-(add-to-list 'load-path "~/.emacs.d/almavizca")
-
 (require 'my-system)
 
 (provide 'init-local)

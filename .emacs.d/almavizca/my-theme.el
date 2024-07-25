@@ -21,7 +21,8 @@
     (set-face-attribute 'mode-line          nil :box        nil)
     (set-face-attribute 'mode-line-inactive nil :box        nil)
     (set-face-attribute 'mode-line-inactive nil :background "#163a43"))
-  (load-theme 'solarized-selenized-dark t)
+
+  (add-hook 'elpaca-after-init-hook (lambda () (load-theme 'solarized-selenized-dark t)))
   )
 
 ;; TODO
@@ -62,12 +63,6 @@
   :ensure t)
 
 (use-package nerd-icons-dired
-  :ensure t)
-
-(use-package counsel
-  :ensure t)
-
-(use-package counsel-tramp
   :ensure t)
 
 ;; dired size

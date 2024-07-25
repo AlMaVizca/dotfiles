@@ -4,10 +4,6 @@
 
 (require 'bookmark)
 
-(use-package htmlize
-  :ensure t
-  :commands (htmlize-buffer htmlize-file))
-
 (use-package esxml
   :ensure t)
 

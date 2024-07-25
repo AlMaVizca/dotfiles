@@ -2,10 +2,8 @@
 ;;; Commentary: system settings
 
 ;;; General settings
-(require 'my-packages)
 (require 'my-bookmarks)
 (require 'my-secrets)
-(require 'my-theme)
 (require 'my-daemon)
 (require 'my-keybindings)
 (require 'my-shell)
@@ -21,10 +19,10 @@
  )
 
 ;;; Reading and writing tools
-(require 'my-org)
 (require 'my-langtool)
 (require 'my-email)
 (require 'my-blog)
+(require 'my-org-addons)
 (use-package pocket-reader
   :ensure t)
 
@@ -37,13 +35,16 @@
 
 ;;; IT Tools
 (require 'my-ai)
-(require 'my-ansible)
 (require 'my-docker)
 (require 'my-gitlab)
 (require 'my-ide)
+(require 'my-ide-typescript)
+(require 'my-ansible)
 (require 'my-kubernetes)
 
+(require 'my-theme)
 (use-package xclip
+  ;; Integrated clipboard
   :ensure t
   :config
   (xclip-mode +1)

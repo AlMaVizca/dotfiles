@@ -2,24 +2,26 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package pass
-  :ensure t
-  :straight t)
-
-(use-package ivy-pass
-  :ensure t)
-
 (use-package password-store
-  :ensure t)
+  :ensure (:protocol https
+                     :host github
+                     :repo "zx2c4/password-store"
+                     :files (:defaults "/contrib/emacs/*")
+                     )
+  )
 
 (use-package password-store-otp
-  :ensure t)
+  :ensure (:protocol https :host github :repo "realcomplex/password-store-otp.el")
+  )
+
+(use-package pass
+  :ensure t
+  :after password-store-otp)
 
 (require 'auth-source-pass)
 (auth-source-pass-enable)
 (setq
  auth-sources '("~/Repositories/dotfiles/emacs.d/authinfo.gpg" password-store)
- bitly-access-token (password-store-get "Work/bitly.com/token")
  )
 
 (fset 'epg-wait-for-status 'ignore)

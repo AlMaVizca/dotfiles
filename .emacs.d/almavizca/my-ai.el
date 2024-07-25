@@ -3,25 +3,22 @@
 ;;; Code:
 
 ;; (use-package openai
-;;   :straight
 ;;   (openai :type git :host github :repo "emacs-openai/openai")
 ;;   )
 ;; (use-package chatgpt
-;;   :straight
 ;;   (chatgpt :type git :host github :repo "emacs-openai/chatgpt")
 ;;   )
 
 (use-package gptel
-  :straight t
+  :ensure t
   :custom
   (gptel-api-key (password-store-get "Work/openai.com/token"))
   ;; (gptel-model "gpt-4")
   )
 
 (use-package codeium
-  ;; if you use straight
-  :straight '(:type git :host github :repo "Exafunction/codeium.el")
-  :disabled t
+  ;; Using elpaca
+  :ensure (:protocol git :host github :repo "Exafunction/codeium.el")
   :custom
   (codeium/metadata/api_key (password-store-get "Work/codeium.com/token"))
   :init

@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package projectile
-  :ensure t
+  :ensure (:wait t)
   :custom
   ((projectile-project-root-files '("Makefile"))
    (projectile-completion-system 'ivy)
@@ -14,6 +14,7 @@
 
 
 (use-package counsel
+  :ensure t
   :config
   (global-set-key "\C-s" 'swiper)
   (global-set-key (kbd "C-c C-r") 'ivy-resume)
@@ -56,10 +57,11 @@
 ;;       (call-interactively #'magit-fetch-from-upstream)
 ;;     (call-interactively #'magit-fetch-current)))
 
+(use-package counsel-tramp
+  :ensure t)
 
 (use-package compile-multi
-  :ensure t
-  :straight t)
+  :ensure t)
 
 (use-package projection-multi
   :ensure t)

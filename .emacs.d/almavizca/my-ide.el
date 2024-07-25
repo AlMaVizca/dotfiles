@@ -18,7 +18,7 @@
 (use-package ivy-fuz
   :ensure t)
 
-(use-package ivy-yasnippet
+(use-package ivy-pass
   :ensure t)
 
 (use-package fill-column-indicator
@@ -31,7 +31,6 @@
 (require 'my-ide-html)
 
 ;; Custom LSP Environments
-(require 'my-ide-typescript)
 ;; (require 'my-lsp)
 ;; (require 'my-eglot)
 
@@ -39,9 +38,6 @@
 (use-package magit
   :ensure t
   )
-
-(use-package magit-section
-  :ensure t)
 
 (use-package magit-todos
   :ensure t
@@ -70,7 +66,6 @@
 
 (use-package company
   :ensure t
-  :straight  nil
   :hook
   (
    (typescript-mode . company-mode)
@@ -91,12 +86,11 @@
 
 (use-package company-box
   :ensure t
-  :straight  nil
   :hook (company-mode . company-box-mode)
   )
 
 (use-package eldoc
-  :ensure t
+  :ensure (:wait t)
   :hook
   (
    (typescript-mode . eldoc-mode)
@@ -130,7 +124,7 @@
 ;;   )
 
 (use-package flycheck
-  :ensure t
+  :ensure (:wait t)
   :hook
   ((typescript-mode . flycheck-mode)))
 
@@ -161,7 +155,6 @@
 
 (use-package web-mode
   :ensure t
-  :straight  nil
   :mode
   (
    ("\\.html?\\'" . web-mode)
@@ -188,10 +181,6 @@
   :ensure t
   :commands impostman-import-file)
 
-(use-package alert
-  :ensure t
-  :commands alert)
-
 ;;; Yasnippets
 (use-package yasnippet
   :ensure t
@@ -201,6 +190,9 @@
 (use-package yasnippet-snippets
   :ensure t
   :after yasnippet)
+
+(use-package ivy-yasnippet
+  :ensure t)
 
 ;; Ctags
 (defun build-ctags ()

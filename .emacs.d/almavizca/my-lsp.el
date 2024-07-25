@@ -40,7 +40,6 @@
 
 (use-package lsp-mode
   :ensure t
-  :straight t
   :init
   (setq lsp-keymap-prefix "C-c l") ;; Or 'C-l', 's-l'
   :config
@@ -53,7 +52,6 @@
     (lsp-mode . yas-minor-mode)
     (lsp-mode . efs/lsp-mode-setup)))
 ;; (use-package lsp-docker
-;;   :straight t
 ;;   :config
 ;;   (defvar lsp-docker-client-packages
 ;;     '(lsp-css lsp-clients lsp-bash lsp-go lsp-pylsp lsp-html lsp-typescript
@@ -70,7 +68,6 @@
 
 (use-package lsp-ui
   :ensure t
-  :straight  t
   :commands lsp-ui-mode
   :hook
   (lsp-mode . lsp-ui-mode)
@@ -173,7 +170,6 @@
 ;;
 ;; (use-package dap-mode
 ;;   :ensure  t
-;;   :straight  t
 ;; Uncomment the config below if you want all UI panes to be hidden by default!
 ;; :custom
 ;; (lsp-enable-dap-auto-configure nil)
@@ -215,7 +211,7 @@
 ;; )
 
 
-;; (setup (:pkg dap-mode :straight t)
+;; (setup (:pkg dap-mode )
 ;;        ;; Assuming that `dap-debug' will invoke all this
 ;;        (:when-loaded
 ;;         (:option lsp-enable-dap-auto-configure nil)

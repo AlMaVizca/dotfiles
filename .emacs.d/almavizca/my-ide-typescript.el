@@ -2,7 +2,7 @@
 ;;; Commentary: custom settings
 ;; Code
 (use-package tide
-  :ensure t
+  :ensure (:wait t)
   :after (typescript-mode javascript-mode)
   :hook
   ((typescript-mode . tide-setup)
