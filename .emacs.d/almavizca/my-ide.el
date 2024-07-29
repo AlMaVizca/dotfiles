@@ -205,7 +205,7 @@
 (use-package wakatime-mode
   :ensure t
   :custom
-  (wakatime-api-key (password-store-get "Work/wakatime.com/token"))
+  (wakatime-api-key (password-store-get-field "Work/wakatime.com/contact@almavizca.xyz" "token"))
   (wakatime-cli-path "/home/krahser/.asdf/shims/wakatime")
   :config
   (global-wakatime-mode t)
