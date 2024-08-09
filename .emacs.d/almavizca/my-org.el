@@ -1,213 +1,73 @@
-﻿;;; my-org -- personal customaization
+;;; my-org -- personal customaization
 ;;; Commentary: Taken from system crafters
 
-(require 'bookmark)
-(setq  roam-directory (bookmark-get-filename "notes"))
+(setq
+ roam-directory (bookmark-get-filename "notes")
+ roam-journal (concat roam-directory "journal")
+ roam-personal (concat roam-directory "personal")
+ roam-blog (concat roam-directory "blog")
+ roam-tech (concat roam-directory "tech")
+ roam-project (concat roam-directory "projects")
+ )
 
-;; Turn on indentation and auto-fill mode for Org files
-(defun dw/org-mode-setup ()
-  (org-indent-mode)
-  (variable-pitch-mode 1)
-  (auto-fill-mode 1)
-  (visual-line-mode 1)
-  (diminish 'org-indent-mode)
+;;; Create roam folders if they don't exist
+(defun org-roam-folders ()
+  (unless (file-exists-p roam-directory)
+    (make-directory roam-directory))
+  (unless (file-exists-p roam-journal)
+    (make-directory roam-journal))
+  (unless (file-exists-p roam-personal)
+    (make-directory roam-personal))
+  (unless (file-exists-p roam-blog)
+    (make-directory roam-blog))
+  (unless (file-exists-p roam-project)
+    (make-directory roam-project))
   )
-
-;; (use-package ox-org
-;;   :ensure t
-;;   )
-
-;;; TODO
-(use-package org-mind-map
-  :disabled t
-  :init
-  (require 'ox-org)
-  :ensure t
-  ;; Uncomment the below if 'ensure-system-packages` is installed
-  ;;:ensure-system-package (gvgen . graphviz)
-  :config
-  (setq org-mind-map-engine "dot")      ; Default. Directed Graph
-  ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
-  ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
-  ;; (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
-  ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
-  ;; (setq org-mind-map-engine "twopi")  ; Radial layouts
-  ;; (setq org-mind-map-engine "circo")  ; Circular Layout
-  )
-
-(defun org-publish-force ()
-  (interactive)
-  (org-publish-all t)
-  )
-
 
 (use-package org
-  :straight t
-  :ensure org-plus-contrib
-  :defer t
-  :hook
-  (org-mode . dw/org-mode-setup)
+  :ensure (:wait t)
+  :init
+  (org-roam-folders)
   :custom
-  (org-directory "~/Repository/Notes")
+  (org-export-use-babel nil)
+  (org-directory roam-directory)
   (org-modules
    '(org-crypt
      org-habit
      ))
   (org-refile-targets '((nil :maxlevel . 1)
                         (org-agenda-files :maxlevel . 1)))
-  (org-agenda-files '("~/Repositories/Notes/"))
-  (org-agenda-list)
+  (org-agenda-files
+   (list roam-journal roam-personal roam-blog roam-tech roam-project
+         (bookmark-get-filename "veanet")))
   (org-outline-path-complete-in-steps nil)
   (org-refile-use-outline-path t)
   (epa-file-encrypt-to "aldo.vizcaino87@gmail.com")
 
+  (org-tag-alist
+   '(;; Places
+     ("@home" . ?H)
+     ("@work" . ?W)
+     ;; Devices
+     ("@computer" . ?C)
+     ("@phone" . ?P)
+     ;; Activities
+     ("@planning" . ?n)
+     ("@programming" . ?p)
+     ("@writing" . ?w)
+     ("@creative" . ?c)
+     ("@email" . ?e)
+     ("@calls" . ?a)
+     ("@errands" . ?r))
+   )
   :config
-  (setq org-ellipsis " ▾"
-        org-hide-emphasis-markers t
-        org-src-fontify-natively t
-        org-fontify-quote-and-verse-blocks t
-        org-src-tab-acts-natively t
-        org-edit-src-content-indentation 2
-        org-hide-block-startup nil
-        org-src-preserve-indentation nil
-        org-startup-folded 'content
-        org-cycle-separator-lines 2
-        fill-column 80
-        org-export-with-title nil
-        org-html-content-class "container"
-
-        )
-  ;; org-export-preserve-breaks t
+  (elpaca (general :wait t))
 
   (global-set-key (kbd "C-c C-p") 'org-publish-force)
-  (use-package org-contrib
-    :ensure t)
-
-  (require 'ox-freemind)
-  (require 'ox-beamer)
-  (use-package ox-gfm
-    :ensure t)
-  (require 'ox-gfm)
-
-
-  (use-package ob-typescript
-    :ensure t)
-
-  (use-package ob-kotlin
-    :ensure t)
-
-  (use-package ob-php
-    :ensure t)
-
-  (use-package ob-redis
-    :ensure t)
-
-  (use-package ob-browser
-    :ensure t)
-
-  (use-package ob-mermaid
-    :ensure t)
-
-  (use-package restclient
-    :ensure t)
-
-  (use-package ob-restclient
-    :ensure t)
-
-
-  (use-package ob-tmux
-    :ensure t
-    :custom
-    (org-babel-default-header-args:tmux
-     '((:results . "silent")       ;
-       (:session . "default")      ; The default tmux session to send code to
-       (:socket  . nil)))          ; The default tmux socket to communicate with
-    ;; The tmux sessions are prefixed with the following string.
-    ;; You can customize this if you like.
-    (org-babel-tmux-session-prefix "ob-")
-    ;; The terminal that will be used.
-    ;; You can also customize the options passed to the terminal.
-    ;; The default terminal is "gnome-terminal" with options "--".
-    (org-babel-tmux-terminal "xterm")
-    (org-babel-tmux-terminal-opts '("-T" "ob-tmux" "-e"))
-    ;; Finally, if your tmux is not in your $PATH for whatever reason, you
-    ;; may set the path to the tmux binary as follows:
-    (org-babel-tmux-location "/usr/bin/tmux"))
-
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '(
-     (browser . t)
-     (emacs-lisp . t)
-     (kotlin . t)
-     (makefile . t)
-     (php . t)
-     (python . t)
-     (redis . t)
-     (restclient . t)
-     (sql . t)
-     (sqlite . t)
-     (typescript . t)
-     ))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
-  ;; NOTE: Subsequent sections are still part of this use-package block!
-
-  (use-package org-superstar
-    :ensure t
-    :after org
-    :hook (org-mode . org-superstar-mode)
-    :custom
-    (org-superstar-remove-leading-stars t)
-    (org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")))
-
-  ;; Replace list hyphen with dot
-  ;; (font-lock-add-keywords 'org-mode
-  ;;                         '(("^ *\\([-]\\) "
-  ;;                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
-  ;; Increase the size of various headings
-  ;; ttc-iosevka-aile
-  (set-face-attribute 'org-document-title t :font "Iosevka Aile" :weight 'bold :height 1.3)
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.1)
-                  (org-level-6 . 1.1)
-                  (org-level-7 . 1.1)
-                  (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'medium :height (cdr face)))
-
-  ;; Make sure org-indent face is available
-  (require 'org-indent)
-
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil :foreground "unspecified" :inherit 'fixed-pitch)
-  (set-face-attribute 'org-table nil  :inherit 'fixed-pitch)
-  (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-
-  ;; Get rid of the background on column views
-  (set-face-attribute 'org-column nil :background "unspecified")
-  (set-face-attribute 'org-column-title nil :background "unspecified")
-
-  ;; TODO: Others to consider
-  ;; '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-  ;; '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-  ;; '(org-property-value ((t (:inherit fixed-pitch))) t)
-  ;; '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-  ;; '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
-  ;; '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-  ;; '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
-
-  ;; This is needed as of Org 9.2
+  ;; Templates expansion of Org structures
   (require 'org-tempo)
 
   (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
@@ -219,7 +79,7 @@
   (add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
   (add-to-list 'org-structure-template-alist '("json" . "src json"))
   )
-
+(setq org-confirm-babel-evaluate nil)
 (use-package org-roam
   :ensure t
   :defer t
@@ -258,21 +118,12 @@
      ("b" "blog" plain "%?"
       :target (file+head "blog/${slug}.org"
                          "#+title: ${title}\n"))
-
-     ("d" "Default" plain "%?"
-      :target (file+head "main/${slug}.org"
-                         "#+title: ${title}\n")
-      :unnarrowed t)
      ("e" "Education" plain "%?"
       :target (file+head "education/${slug}.org"
                          "#+title: ${title}\n")
       :unnarrowed t)
-     ("g" "glm" plain "%?"
-      :target (file+head "glm/${slug}.org"
-                         "#+title: ${title}\n")
-      :unnarrowed t)
-     ("n" "Nature" plain "%?"
-      :target (file+head "nature/${slug}.org"
+     ("j" "Journal" plain "%?"
+      :target (file+head "journal/${slug}.org"
                          "#+title: ${title}\n")
       :unnarrowed t)
      ("p" "Personal" plain "%?"
@@ -283,9 +134,12 @@
       :target (file+head "projects/${slug}.org"
                          "#+title: ${title}\n")
       :unnarrowed t)
-
+     ("v" "veanet" plain "%?"
+      :target (file+head "projects/veanet/${slug}.org"
+                         "#+title: ${title}\n")
+      :unnarrowed t)
      ("t" "Tech" plain "%?"
-      :target (file+head "Tech/${slug}.org"
+      :target (file+head "tech/${slug}.org"
                          "#+title: ${title}\n")
       :unnarrowed t)
      ("s" "Social" plain "%?"
@@ -315,77 +169,22 @@
       "* %?"
       :target (file+head
                "%<%Y%m%d>.org"
-               "#+title: %<%Y-%m-%d>\n\n[[roam:%<%Y-%B>]]\n\n")
+               "#+title: %<%Y-%m-%d>\n\n[[roam:%<%Y-%m>]]\n\n"
+               ;; "* Feelings of the day\n"
+               ;; "* Feelings after the day\n"
+               ;; "** What are the three things I am gratefull?\n"
+               ;; "** What are the three things that I have learn?\n"
+               ;; "** What things have to happen to feel like I'm crushing the next day?\n"
+               ;; (insert-file-contents (bookmark-get-filename "journal_template"))
+               )
       :olp ("Log")
       )
-     ("t" "Task" entry
-      #'org-roam-capture--get-point
-      "* TODO %?\n  %U\n  %a\n  %i"
-      :target (file+head
-               "Journal/%<%Y-%m-%d>"
-               "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-      :olp ("Tasks")
-      :empty-lines 1
-      )
-     ("l" "log entry" entry
-      #'org-roam-capture--get-point
-      "* %<%I:%M %p> - %?"
-      :target (file+head
-               "Journal/%<%Y-%m-%d>"
-               "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-      :olp ("Log")
-      )
-     ("m" "meeting" entry
-      #'org-roam-capture--get-point
-      "* %<%I:%M %p> - %^{Meeting Title}  :meetings:\n\n%?\n\n"
-      :target (file+head
-               "Journal/%<%Y-%m-%d>"
-               "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-      :olp ("Log")
-      ))
+     )
    )
   )
 
-(use-package toc-org
-  :ensure t
-  )
-
-(use-package org-ref
-  :ensure t)
-
-;; TODO
-;; (use-package org-sidebar
-;;   :ensure t)
-
-;; (cl-defmethod org-roam-node-type ((node org-roam-node))
-;;   "Return the TYPE of NODE."
-;;   (condition-case nil
-;;       (file-name-nondirectory
-;;        (directory-file-name
-;;         (file-name-directory
-;;          (file-relative-name (org-roam-node-file node) org-roam-directory))))
-;;     (error "")))
-
-(use-package org-cliplink
-  ;; Insert links with org-mode format from the clipboard
-  :ensure t
-  :config
-  (global-set-key (kbd "C-x p i") 'org-cliplink)
-  )
-
-(use-package org-super-agenda
-  :ensure t
-  :custom
-  (org-super-agenda-groups
-   '((:auto-map (lambda (item)
-                  (-when-let* ((marker (or (get-text-property 0 'org-marker item)
-                                           (get-text-property 0 'org-hd-marker item)))
-                               (file-path (->> marker marker-buffer buffer-file-name))
-                               (directory-name (->> file-path file-name-directory directory-file-name file-name-nondirectory)))
-                    (concat "Directory: " directory-name))))))
-  (org-super-agenda-mode t)
-  )
-
+(use-package org-roam-ui
+  :ensure (:wait t))
 
 (provide 'my-org)
-;;; my-org ends here
+;;; my-org.el ends here
