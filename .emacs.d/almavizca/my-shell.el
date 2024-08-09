@@ -8,7 +8,6 @@
 ;;; Code:
 (use-package vterm
   :ensure t
-  :commands vterm
   :bind (:map vterm-mode-map
               ([mouse-1] . nil)
               ([mouse-2] . nil)
@@ -18,6 +17,7 @@
               )
   :custom
   (vterm-always-compile-module t)
+  (vterm-enable-manipulate-selection-data-by-osc52 t)
   :config
   (define-key vterm-mode-map (kbd "C-q") #'vterm-send-next-key)
   )

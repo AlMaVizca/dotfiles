@@ -68,4 +68,4 @@
   )
 
 (provide 'my-packages)
-;;; my-packages ends here
+;;; my-packages.el ends here

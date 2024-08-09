@@ -3,8 +3,7 @@
 ;;; Code:
 
 (use-package ansible
-  :ensure t
-  :commands ansible-mode)
+  :ensure t)
 
 (use-package ansible-doc
   :ensure t

@@ -11,8 +11,6 @@
 
 (use-package dockerfile-mode
   :ensure t
-  :hook
-  (dockerfile-mode . lsp-mode)
   )
 
 (use-package docker
