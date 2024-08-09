@@ -78,5 +78,12 @@
   (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset)
   )
 
+(use-package khoj
+  :ensure t
+  :disabled t
+  :custom
+  (khoj-server-url "http://khoj.docker")
+  )
+
 (provide 'my-ai)
 ;;; my-ai.el ends here
