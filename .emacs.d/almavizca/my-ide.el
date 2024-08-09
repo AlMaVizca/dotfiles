@@ -31,7 +31,7 @@
 (require 'my-ide-html)
 
 ;; Custom LSP Environments
-;; (require 'my-lsp)
+(require 'my-lsp)
 ;; (require 'my-eglot)
 
 
