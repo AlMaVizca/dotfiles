@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: krahser (https://github.com/krahser)
+#= DESCRIPTION: Basic tmux global session
+
+new_session -d -n 'backend'
+send_line 'backend' 'cd ${orgnote-backend}'

@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vi: set ft=sh :
+
+#= AUTHOR: farfanoide (https://github.com/farfanoide)
+#= DESCRIPTION: Basic remote tmux session
+
+new_session -n 'veanet'
+send_line 'veanet' 'cd veanet'
