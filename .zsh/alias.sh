@@ -20,6 +20,9 @@ alias rgrep="grep -ir"
 alias passwords_keep="sudo chattr +i ~/.local/share/keyrings/login.keyring"
 alias passwords_change="sudo chattr -i ~/.local/share/keyrings/login.keyring"
 
+#tmux
+alias ys="yat.sh"
+
 #Makefiles
 alias blog="make -C ~/Repositories/AlMaVizca/blog/"
 alias bot="make -C ~/Repositories/economics/binance-trading-bot"

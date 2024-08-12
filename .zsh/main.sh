@@ -1,14 +1,5 @@
 # Alias and functions
 
-ys(){
-    if [[ -n $1 ]]; then
-        yat.sh $1
-    else
-        yat.sh ${EMACS_DAEMON}
-    fi
-}
-
-
 emacsdaemon(){
 if [ ! -e /tmp/server-${EMACS_DAEMON} ]; then
    touch /tmp/server-${EMACS_DAEMON}
