@@ -216,7 +216,11 @@
   (org-babel-tmux-terminal-opts nil)
   :config
   (add-to-list 'org-babel-load-languages
-               '(tmux . t)))
+               '(tmux . t))
+  ;; Don't open a window after the execution
+  (add-to-list 'display-buffer-alist
+               (cons "\\*Async Shell Command\\*.*" (cons #'display-buffer-no-window nil)))
+  )
 
 ;; Writing beamer presentations in org-mode
 ;;https://orgmode.org/worg/exporters/beamer/tutorial.html
@@ -229,7 +233,6 @@
 
 (use-package org-sidebar
   :ensure (:protocol https :host github :repo "alphapapa/org-sidebar"))
-
 
 (provide 'my-org-addons)
 ;;; my-org-addons.el ends here

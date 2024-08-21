@@ -36,10 +36,6 @@
   (multi-vterm-buffer-name daemon-name)
   (multi-term-default-dir (bookmark-get-filename daemon-name)))
 
-;; Don't open a window after the execution
-(add-to-list 'display-buffer-alist
-  (cons "\\*Async Shell Command\\*.*" (cons #'display-buffer-no-window nil)))
-
 (defun yat-session (session)
   "Create yat session"
   (async-shell-command (concat "ys create " session))
