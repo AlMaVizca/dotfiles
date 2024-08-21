@@ -2,7 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 (use-package mu4e
-  :ensure nil
+  :ensure (:repo "djcb/mu"
+                 :host github
+                 :files (:defaults "/mu4e/*"))
   ;; :load-path "/usr/share/emacs/site-lisp/mu4e/"
   :after password-store
   :config
@@ -52,11 +54,11 @@
          (when msg
            (string-prefix-p "/Almavizca" (mu4e-message-field msg :maildir))))
        :vars `(
-               (user-mail-address . ,(password-store-get-field "Personal/mail-work" "login"))
-               (user-full-name . ,(password-store-get-field "Personal/mail-work" "fullname"))
+               (user-mail-address . ,(password-store-get-field "Work/mail-work" "login"))
+               (user-full-name . ,(password-store-get-field "Work/mail-work" "fullname"))
                ;; smtp
-               (smtpmail-smtp-server . ,(password-store-get-field "Personal/mail-work" "smtp"))
-               (smtpmail-smtp-user . ,(password-store-get-field "Personal/mail-work" "login"))
+               (smtpmail-smtp-server . ,(password-store-get-field "Work/mail-work" "smtp"))
+               (smtpmail-smtp-user . ,(password-store-get-field "Work/mail-work" "login"))
                (mu4e-drafts-folder  . "/Almavizca/Drafts")
                (mu4e-sent-folder  . "/Almavizca/Sent")
                (mu4e-refile-folder  . "/Almavizca/")
@@ -82,9 +84,16 @@
               (flyspell-mode)))
   )
 
-(use-package mu4e-conversation
-  :ensure t
-  :after mue4e)
+;; (use-package mu4e-conversation
+;;   :ensure t
+;;   :after mu4e)
+
+(use-package mu4e-dashboard
+  :ensure (:repo "rougier/mu4e-dashboard"
+                 :protocol https
+                 :host github)
+  )
+
 
 (provide 'my-email)
 ;;; my-email.el ends here
