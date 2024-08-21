@@ -13,10 +13,15 @@
  enable-remote-dir-locals t
  ;; Follow symlinks without ask
  vc-follow-symlinks t
+ ;; Disable reopen buffers
+ desktop-save-mode nil
  ;; debug errors
  debug-on-error t
  debug-on-signal nil
+ file-name-history '()
  )
+(remove-hook 'after-init-hook 'savehist-hook t)
+(remove-hook 'after-init-hook 'recentf-mode t)
 
 ;;; Reading and writing tools
 (require 'my-langtool)

@@ -3,7 +3,13 @@
 ;;; Code:
 (require 'bookmark)
 (setq-default bookmark-default-file "~/.dotfiles-secrets/.local/emacs.d/bookmarks.el")
-(setq bookmark-save-flag 1)
+(setq bookmark-save-flag 1
+      ;;; Don't populate file-name-history with recentf
+      history-files-length 1
+      recentf-initialize-file-name-history nil
+      recentf-max-saved-items history-files-length
+      history-length history-files-length
+      )
 (bookmark-load bookmark-default-file t)
 
 (defun local-directory-bookmarks-to-zsh ()
