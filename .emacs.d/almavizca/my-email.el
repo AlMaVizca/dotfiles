@@ -23,7 +23,7 @@
    smtpmail-smtp-service 465
    smtpmail-stream-type  'ssl
    message-send-mail-function 'smtpmail-send-it
-   mml-secure-openpgp-signers '("AA9C5629F91296F6FDC58C3095E7D44EAF29704D")
+   mml-secure-openpgp-signers `(,(password-store-get-field "Personal/mail-personal" "key"))
 
 
    ;; contexts

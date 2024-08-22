@@ -66,5 +66,9 @@
 (use-package projection-multi
   :ensure t)
 
+(use-package asdf
+  :ensure (:repo "tabfugnic/asdf.el"
+                 :host github))
+
 (provide 'my-ide-projects)
 ;;; my-ide-projects.el ends here
