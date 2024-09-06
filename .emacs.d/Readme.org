@@ -15,8 +15,8 @@ Then the startup process continues loading Purcell's settings, and later
 init-local.el to load my-system.el
 /my-system.el/ is loading these different sections:
 
-#+begin_src mermaid :file ../.assets/structure.png :scale 3
-  flowchart TD
+#+begin_src mermaid :file ../.assets/structure.png :scale 10
+  flowchart LR
    init-local.el-->ms[/my-system.el\]
    ms --> gs[/General settings block\]
    ms --> rw[/Read & Write block\]
@@ -40,6 +40,7 @@ init-local.el to load my-system.el
    it --> my-gitlab.el
    cm --> my-ansible.el
    cm --> my-kubernetes.el
+   cm --> terraform(terraform)
    ide --> my-ide-html.el
    ide --> my-ide-typescript.el
    ide --> my-ide-projects.el
