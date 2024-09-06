@@ -18,6 +18,7 @@
  ;; debug errors
  debug-on-error t
  debug-on-signal nil
+ doc-view-continuous t
  file-name-history '()
  )
 (remove-hook 'after-init-hook 'savehist-hook t)

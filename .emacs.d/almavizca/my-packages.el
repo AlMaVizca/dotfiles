@@ -59,10 +59,10 @@
                  '(file))
            '("\\.lyx" "lyx" (file))
            '("\\.chm" "kchmviewer" (file))
-           (list (openwith-make-extension-regexp
-                  '("pdf" "ps" "ps.gz" "dvi"))
-                 "evince"
-                 '(file))
+           ;; (list (openwith-make-extension-regexp
+           ;;        '("pdf" "ps" "ps.gz" "dvi"))
+           ;;       "evince"
+           ;;       '(file))
            ))
     (openwith-mode 1))
   )
