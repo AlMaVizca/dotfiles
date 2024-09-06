@@ -44,8 +44,7 @@
 (require 'my-gitlab)
 (require 'my-ide)
 (require 'my-ide-typescript)
-(require 'my-ansible)
-(require 'my-kubernetes)
+(require 'my-cloud-management)
 
 (require 'my-theme)
 (use-package xclip

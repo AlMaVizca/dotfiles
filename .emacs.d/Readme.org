@@ -15,7 +15,7 @@ Then the startup process continues loading Purcell's settings, and later
 init-local.el to load my-system.el
 /my-system.el/ is loading these different sections:
 
-#+begin_src mermaid :file ../.assets/structure.png
+#+begin_src mermaid :file ../.assets/structure.png :scale 3
   flowchart TD
    init-local.el-->ms[/my-system.el\]
    ms --> gs[/General settings block\]
@@ -34,11 +34,12 @@ init-local.el to load my-system.el
    rw --> my-email.el
    rw --> my-blog.el
    it --> my-ai.el
-   it --> my-ansible.el
+   it --> ide[/my-ide.el\]
+   it --> cm[/my-cloud-management.el\]
    it --> my-docker.el
    it --> my-gitlab.el
-   it --> ide[/my-ide.el\]
-   it --> my-kubernetes.el
+   cm --> my-ansible.el
+   cm --> my-kubernetes.el
    ide --> my-ide-html.el
    ide --> my-ide-typescript.el
    ide --> my-ide-projects.el
@@ -46,7 +47,7 @@ init-local.el to load my-system.el
 #+end_src
 
 #+RESULTS:
-[[file:../.assets/emacs-structure.png]]
+[[file:../.assets/structure.png]]
 
 
 I'm a big fan of [[https://www.emacswiki.org/emacs/BookMarks][bookmarks]], and I get to use them also with my shell -> [[https://www.emacswiki.org/emacs/BookMarks#h5o-9][syncing bookmarks with zsh]]
